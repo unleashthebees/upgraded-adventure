@@ -14,13 +14,36 @@
 	<div id="content_other"></div>
 	
 	<script>
+		// values of player's choice
 		var stats = {};
 		stats.classes = "Cleric 9";
-		stats.HD = 9;
-		stats.BAB = "BAB_3_4(stats.HD)";
-		stats.baseFOR = "SAVE_GOOD(stats.HD)";
-		stats.baseREF = "SAVE_POOR(stats.HD)";
-		stats.baseWIL = "SAVE_GOOD(stats.HD)";
+		stats.HD = [8,6,8,6,6,8,5,8,3];
+		stats.clvl = 9;
+		stats.base_abilities={
+			STR: 13,
+			DEX: 17,
+			CON: 10,
+			INT: 8,
+			WIS: 15,
+			CHA: 8
+		};
+		stats.BAB = "BAB_3_4(stats.clvl)";
+		stats.baseFOR = "SAVE_GOOD(stats.clvl)";
+		stats.baseREF = "SAVE_POOR(stats.clvl)";
+		stats.baseWIL = "SAVE_GOOD(stats.clvl)";
+
+		stats.adjustments = [
+			{
+				data: ["CON-2", "INT+2", "DEX+2"],
+				type: "racial",
+				source: "Racial Trait"
+			}
+		];
+
+		// other values
+		stats.totalCON = stats.base_abilities.CON;
+
+		stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
 		$("#tab_combat").click(function() {
 			$("#content_other").hide();
@@ -37,6 +60,10 @@
 			var classElem = $("<div></div>");
 			classElem.append(val(stats.classes));
 			parent.append(classElem);
+			
+			var hitpointsElem = $("<div></div>");
+			hitpointsElem.append(val(stats.hitpoints));
+			parent.append(hitpointsElem);
 			
 			var babElem = $("<div></div>");
 			babElem.append(val(stats.BAB));

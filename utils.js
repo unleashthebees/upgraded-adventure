@@ -18,3 +18,16 @@ function SAVE_GOOD(clvl) {
 function SAVE_POOR(clvl) {
 	return Math.floor(clvl/3);
 }
+
+function SUM_HD(dice,con) {
+	var conmod = STAT_MOD(con);
+	var result = 0;
+	for (var i in dice) {
+		result += Math.max(1,dice[i]+conmod);
+	}
+	return result;
+}
+
+function STAT_MOD(x) {
+	return Math.floor((x-10)/2);
+}
