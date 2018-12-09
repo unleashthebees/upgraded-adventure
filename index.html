@@ -57,17 +57,9 @@
 		function showCombatStats() {
 			var parent = $("#content_combat")
 			
-			var classElem = $("<div></div>");
-			classElem.append(val(stats.classes));
-			parent.append(classElem);
-			
-			var hitpointsElem = $("<div></div>");
-			hitpointsElem.append(val(stats.hitpoints));
-			parent.append(hitpointsElem);
-			
-			var babElem = $("<div></div>");
-			babElem.append(val(stats.BAB));
-			parent.append(babElem);
+			createDisplayElem("classes", parent);
+			createDisplayElem("hitpoints", parent);
+			createDisplayElem("BAB", parent);
 		}
 
 		showCombatStats();

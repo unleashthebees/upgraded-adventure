@@ -31,3 +31,9 @@ function SUM_HD(dice,con) {
 function STAT_MOD(x) {
 	return Math.floor((x-10)/2);
 }
+
+function createDisplayElem(attr, parentElem) {
+	var elem = $("<div></div>");
+	elem.append(val(stats[attr]));
+	parentElem.append(elem);
+}
