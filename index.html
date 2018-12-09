@@ -7,15 +7,44 @@
 <body>
 	<noscript>Scripts are disabled.</noscript>
 
+	<div id="tab_combat">Combat</div>
+	<div id="tab_other">Other</div>
+
+	<div id="content_combat"></div>
+	<div id="content_other"></div>
+	
 	<script>
 		var stats = {};
+		stats.classes = "Cleric 9";
 		stats.HD = 9;
-		stats.BAB = BAB_3_4(stats.HD);
-		console.log(stats.BAB);
+		stats.BAB = "BAB_3_4(stats.HD)";
+		stats.baseFOR = "SAVE_GOOD(stats.HD)";
+		stats.baseREF = "SAVE_POOR(stats.HD)";
+		stats.baseWIL = "SAVE_GOOD(stats.HD)";
+
+		$("#tab_combat").click(function() {
+			$("#content_other").hide();
+			$("#content_combat").show();
+		});
+		$("#tab_other").click(function() {
+			$("#content_combat").hide();
+			$("#content_other").show();
+		});
+
+		function showCombatStats() {
+			var parent = $("#content_combat")
+			
+			var classElem = $("<div></div>");
+			classElem.append(val(stats.classes));
+			parent.append(classElem);
+			
+			var babElem = $("<div></div>");
+			babElem.append(val(stats.BAB));
+			parent.append(babElem);
+		}
+
+		showCombatStats();
 	</script>
 
-	<h1>Hello World</h1>
-	<h1>more stuff</h1>
 </body>
-
 </html>
