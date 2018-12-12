@@ -39,15 +39,28 @@
 				source: "Ability Score Racial Traits",
 			},
 			{
-				data: [""],
+				data: ["ATK+3"], // TODO: clvl based values
 				type: "luck",
 				source: "Divine Favor",
+			},
+			{
+				data: ["DEX+2"],
+				type: "enhancement",
+				source: "Item"
 			}
 		];
 
 		// other values
+		//stats.totalCON = stats.CON;
+		stats.totalSTR = stats.STR;
+		stats.totalDEX = stats.DEX;
 		stats.totalCON = stats.CON;
+		stats.totalINT = stats.INT;
+		stats.totalWIS = stats.WIS;
+		stats.totalCHA = stats.CHA;
 
+
+		applyAdjustments();
 
 		stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 

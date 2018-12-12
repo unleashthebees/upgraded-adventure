@@ -22,7 +22,7 @@ function SAVE_POOR(clvl) {
 function SUM_HD(dice,con) {
 	var conmod = STAT_MOD(con);
 	var result = 0;
-	for (var i in dice) {
+	for (let i in dice) {
 		result += Math.max(1,dice[i]+conmod);
 	}
 	return result;
@@ -30,6 +30,18 @@ function SUM_HD(dice,con) {
 
 function STAT_MOD(x) {
 	return Math.floor((x-10)/2);
+}
+
+function applyAdjustments() {
+	for (let i in stats.adjustments) {
+		let adj = stats.adjustments[i];
+		console.log(adj.source);
+		for (let idata in adj.data) {
+			let str=adj.data[idata];
+			let stat=str.substr(0,str.search(/[+-]/));
+			console.log(stat);
+		}
+	}
 }
 
 function createDisplayElem(attr, parentElem) {
