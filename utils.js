@@ -32,6 +32,16 @@ function STAT_MOD(x) {
 	return Math.floor((x-10)/2);
 }
 
+function SPELLS_PER_DAY_PREPARED_FULLCASTER(clvl) {
+	return [
+		[3,1],
+		[4,2],
+		[4,2,1],
+		[4,3,2],
+		[4,3,2,1]
+	][clvl];	
+}
+
 function createDisplayElem(attr, parentElem) {
 	var elem = $("<div></div>");
 	elem.append(val(stats[attr]));
