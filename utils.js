@@ -79,6 +79,10 @@ function SPELLS_PER_DAY_PREPARED_FULLCASTER(clvl) {
 	][clvl];	
 }
 
+function BONUS_SPELLS_PER_DAY(mod,slvl) {
+	return Math.max(0, Math.ceil((mod-slvl+1)/4));
+}
+
 function createDisplayElem(attr, parentElem) {
 	var elem = $("<div></div>");
 	elem.append(attr+": ");
