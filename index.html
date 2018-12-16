@@ -41,26 +41,31 @@
 			replaced class/race feats
 		*/
 
+
 		stats.adjustments = [
 			{
 				data: ["CON-2", "INT+2", "DEX+2"],
 				type: "",
 				source: "Ability Score Racial Traits",
+				availability: "constant"
 			},
 			{
 				data: ["DEX+1", "WIS+1"],
 				type: "",
-				source: "Advancement (Levels 4,8)"
+				source: "Advancement (Levels 4,8)",
+				availability: "constant"
 			},
 			{
 				data: ["ATK+3", "DMG+3"], // TODO: clvl based values
 				type: "luck",
 				source: "Divine Favor",
+				availability: "off"
 			},
 			{
 				data: ["DEX+2"],
 				type: "enhancement",
-				source: "Item"
+				source: "Item",
+				availability: "item"
 			}
 		];
 
@@ -71,7 +76,6 @@
 		stats.totalINT = stats.INT;
 		stats.totalWIS = stats.WIS;
 		stats.totalCHA = stats.CHA;
-
 
 		applyAdjustments();
 
