@@ -9,6 +9,7 @@
 
 	<div id="tab_combat">Combat</div>
 	<div id="tab_other">Other</div>
+	<!-- TODO: spells,build info (feats chosen per level), active buffs/debuffs -->
 
 	<div id="content_combat"></div>
 	<div id="content_other"></div>
@@ -39,7 +40,12 @@
 				source: "Ability Score Racial Traits",
 			},
 			{
-				data: ["ATK+3"], // TODO: clvl based values
+				data: ["DEX+1", "WIS+1"],
+				type: "",
+				source: "Advancement (Levels 4,8)"
+			},
+			{
+				data: ["ATK+3", "DMG+3"], // TODO: clvl based values
 				type: "luck",
 				source: "Divine Favor",
 			},
@@ -79,6 +85,12 @@
 			createDisplayElem("classes", parent);
 			createDisplayElem("hitpoints", parent);
 			createDisplayElem("BAB", parent);
+			createDisplayElem("totalSTR", parent);
+			createDisplayElem("totalDEX", parent);
+			createDisplayElem("totalCON", parent);
+			createDisplayElem("totalINT", parent);
+			createDisplayElem("totalWIS", parent);
+			createDisplayElem("totalCHA", parent);
 		}
 
 		showCombatStats();
