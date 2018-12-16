@@ -56,7 +56,7 @@ function applySingleAdjustment(stat, formula) {
 
 function SPELLS_PER_DAY_PREPARED_FULLCASTER(clvl) {
 	return [
-	/* 1*/	[3,1], 
+	/* 1*/	[3,1],
 	/* 2*/	[4,2],
 	/* 3*/	[4,2,1],
 	/* 4*/	[4,3,2],
@@ -87,5 +87,12 @@ function createDisplayElem(attr, parentElem) {
 	var elem = $("<div></div>");
 	elem.append(attr+": ");
 	elem.append(val(stats[attr]));
+	parentElem.append(elem);
+}
+
+function createSpellsElem(parentElem) {
+	var elem = $("<div></div>");
+	elem.append("MAGIC");
+
 	parentElem.append(elem);
 }

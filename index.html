@@ -79,6 +79,8 @@
 
 		applyAdjustments();
 
+		stats.testValue = SPELLS_PER_DAY_PREPARED_FULLCASTER(stats.clvl)[1];
+
 		stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
 		$("#tab_combat").click(function() {
@@ -102,6 +104,8 @@
 			createDisplayElem("totalINT", parent);
 			createDisplayElem("totalWIS", parent);
 			createDisplayElem("totalCHA", parent);
+			createDisplayElem("testValue", parent);
+			createSpellsElem(parent);
 		}
 
 		showCombatStats();
