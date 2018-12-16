@@ -54,6 +54,16 @@ function applySingleAdjustment(stat, formula) {
 	stats["total"+stat] = eval(expr);
 }
 
+function SPELLS_PER_DAY_PREPARED_FULLCASTER(clvl) {
+	return [
+		[3,1],
+		[4,2],
+		[4,2,1],
+		[4,3,2],
+		[4,3,2,1]
+	][clvl];	
+}
+
 function createDisplayElem(attr, parentElem) {
 	var elem = $("<div></div>");
 	elem.append(attr+": ");
