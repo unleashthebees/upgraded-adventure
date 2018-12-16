@@ -82,7 +82,13 @@
 			{
 				data: ["DEX+2"],
 				type: "enhancement",
-				source: "Item",
+				source: "Belt of Incredible Dexterity",
+				availability: "item"
+			},
+			{
+				data: ["ATK+1", "DMG+1"],
+				type: "enhancement",
+				source: "Composite Longbow +1 holy",
 				availability: "item"
 			}
 		];
@@ -95,9 +101,12 @@
 		stats.totalWIS = stats.WIS;
 		stats.totalCHA = stats.CHA;
 
+		stats.totalATK = 0;
+
 		applyAdjustments();
 
 		stats.testValue = SPELLS_PER_DAY_PREPARED_FULLCASTER(stats.clvl)[1];
+		stats.testToHitRanged = val(stats.BAB) + STAT_MOD(stats.totalDEX) + stats.totalATK;
 
 		stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
@@ -123,6 +132,8 @@
 			createDisplayElem("totalWIS", parent);
 			createDisplayElem("totalCHA", parent);
 			createDisplayElem("testValue", parent);
+			createDisplayElem("testToHitRanged", parent);
+			
 			createSpellsElem(parent);
 		}
 
