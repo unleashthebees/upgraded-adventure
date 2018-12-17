@@ -7,7 +7,8 @@ function val(formula) {
 	}
 }
 
-function applyAdjustments() {
+function applyAdjustments(baseValue, baseStat) {
+	let result = baseValue;
 	for (let i in stats.adjustments) {
 		let adj = stats.adjustments[i];
 		for (let idata in adj.data) {
@@ -15,18 +16,14 @@ function applyAdjustments() {
 			let pos = str.search(/[+-]/);
 			let stat = str.substr(0,pos).trim();
 			let formula = str.substr(pos).trim();
-			if ("total"+stat in stats) {
-				applySingleAdjustment(stat, formula);
+			if (baseStat == stat) {
+				console.log("adjust stat: "+baseStat+" "+formula);
+				let expr = "result"+formula;
+				result = eval(expr);
 			}
 		}
 	}
-}
-
-function applySingleAdjustment(stat, formula) {
-	console.log("adjust stat: "+stat+" "+formula);
-	let val = stats["total"+stat]
-	let expr = "val"+formula;
-	stats["total"+stat] = eval(expr);
+	return result;
 }
 
 function createDisplayElem(attr, parentElem) {

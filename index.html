@@ -95,16 +95,14 @@
 		];
 
 		// other values
-		stats.totalSTR = stats.STR;
-		stats.totalDEX = stats.DEX;
-		stats.totalCON = stats.CON;
-		stats.totalINT = stats.INT;
-		stats.totalWIS = stats.WIS;
-		stats.totalCHA = stats.CHA;
+		stats.totalSTR = applyAdjustments(stats.STR, "STR");
+		stats.totalDEX = applyAdjustments(stats.DEX, "DEX");
+		stats.totalCON = applyAdjustments(stats.CON, "CON");
+		stats.totalINT = applyAdjustments(stats.INT, "INT");
+		stats.totalWIS = applyAdjustments(stats.WIS, "WIS");
+		stats.totalCHA = applyAdjustments(stats.CHA, "CHA");
 
-		stats.totalATK = 0;
-
-		applyAdjustments();
+		stats.totalATK = applyAdjustments(0, "ATK");
 
 		stats.testValue = SPELLS_PER_DAY_PREPARED_FULLCASTER(stats.clvl)[1];
 		stats.testToHitRanged = val(stats.BAB) + STAT_MOD(stats.totalDEX) + stats.totalATK;
