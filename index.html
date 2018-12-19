@@ -51,13 +51,13 @@
 		}
 
 		/* missing input:
-			selected favored class bonus per level
 			selected domains
 			selected deity
 			selected feats
 			selected traits
 			replaced class/race feats
 			class skills
+			conditional bonuses
 		*/
 
 
@@ -72,6 +72,32 @@
 				data: ["DEX+1", "WIS+1"],
 				type: "",
 				source: "Advancement (Levels 4,8)",
+				availability: "constant"
+			},
+			{
+				data: ["SKILLRANKS+9"],
+				type: "",
+				source: "Favored Class Bonus (Levels 1-9)",
+				availability: "constant"
+			},
+			{
+				data: [
+					"appraise+3",
+					"craft+3",
+					"diplomacy+3",
+					"heal+3",
+					"knowledge_arcana+3",
+					"knowledge_history+3",
+					"knowledge_nobility+3",
+					"knowledge_planes+3",
+					"knowledge_religion+3",
+					"linguistics+3",
+					"profession+3",
+					"sense_motive+3",
+					"spellcraft+3"
+				],
+				type: "",
+				source: "Class Skills (Cleric)",
 				availability: "constant"
 			},
 			{
