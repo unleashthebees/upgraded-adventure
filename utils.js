@@ -44,6 +44,15 @@ function createDisplayElem(attr, parentElem) {
 	parentElem.append(elem);
 }
 
+function createSkillsTable() {
+	let tableElem = $("<table></table>");
+	for (let skill in stats.skills) {
+		let bonus = stats.skills[skill];
+		tableElem.append("<tr><td>"+skill+"</td><td>"+bonus+"</td></tr>");
+	}
+	return tableElem;
+}
+
 function createSpellsElem(parentElem) {
 	let elem = $("<div></div>");
 	elem.append("MAGIC");
