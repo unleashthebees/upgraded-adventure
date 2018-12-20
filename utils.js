@@ -26,6 +26,17 @@ function applyAdjustments(baseValue, baseStat) {
 	return result;
 }
 
+function calculateSkill(skillname, ability) {
+	let ranks = stats.skillranks[skillname];
+	let classSkillbonus = applyAdjustments(0, "cs_"+skillname);
+
+	if (ranks > 0) {
+		stats.skills[skillname] =
+			STAT_MOD(stats["total" + ability]) +
+			applyAdjustments(ranks+classSkillbonus, skillname);
+	}
+}
+
 function createDisplayElem(attr, parentElem) {
 	var elem = $("<div></div>");
 	elem.append(attr+": ");

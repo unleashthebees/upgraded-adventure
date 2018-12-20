@@ -58,6 +58,7 @@
 			replaced class/race feats
 			class skills
 			conditional bonuses
+			attacks / weapons
 		*/
 
 
@@ -82,19 +83,19 @@
 			},
 			{
 				data: [
-					"appraise+3",
-					"craft+3",
-					"diplomacy+3",
-					"heal+3",
-					"knowledge_arcana+3",
-					"knowledge_history+3",
-					"knowledge_nobility+3",
-					"knowledge_planes+3",
-					"knowledge_religion+3",
-					"linguistics+3",
-					"profession+3",
-					"sense_motive+3",
-					"spellcraft+3"
+					"cs_appraise +3",
+					"cs_craft +3",
+					"cs_diplomacy +3",
+					"cs_heal +3",
+					"cs_knowledge_arcana +3",
+					"cs_knowledge_history +3",
+					"cs_knowledge_nobility +3",
+					"cs_knowledge_planes +3",
+					"cs_knowledge_religion +3",
+					"cs_linguistics +3",
+					"cs_profession +3",
+					"cs_sense_motive +3",
+					"cs_spellcraft 3"
 				],
 				type: "",
 				source: "Class Skills (Cleric)",
@@ -110,6 +111,18 @@
 				data: ["DEX+2"],
 				type: "enhancement",
 				source: "Belt of Incredible Dexterity",
+				availability: "item" // TODO: item slots (overview / slot usage)
+			},
+			{
+				data: ["cs_stealth +3", "stealth +1"], // TODO: conditional extra +1
+				type: "trait",
+				source: "Highlander (Trait)",
+				availability: "constant"
+			},
+			{
+				data: ["stealth +5"],
+				type: "competence",
+				source: "Cloak of Elvenkind",
 				availability: "item"
 			},
 			{
@@ -135,6 +148,12 @@
 
 		stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
+		stats.skills = {};
+
+		calculateSkill("stealth", "DEX");
+
+		
+
 		$("#tab_combat").click(function() {
 			$("#content_other").hide();
 			$("#content_combat").show();
@@ -158,8 +177,11 @@
 			createDisplayElem("totalCHA", parent);
 			createDisplayElem("testValue", parent);
 			createDisplayElem("testToHitRanged", parent);
+			createDisplayElem("",parent);
+			console.log("stealth: "+stats.skills.stealth);
 			
-			createSpellsElem(parent);
+			//createSpellsElem(parent);
+
 		}
 
 		showCombatStats();
