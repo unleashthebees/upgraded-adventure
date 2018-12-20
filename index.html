@@ -151,6 +151,8 @@
 		stats.skills = {};
 
 		calculateSkill("stealth", "DEX");
+		calculateSkill("heal", "WIS");
+		calculateSkill("knowledge_religion", "INT");
 
 		
 
@@ -164,7 +166,7 @@
 		});
 
 		function showCombatStats() {
-			var parent = $("#content_combat")
+			let parent = $("#content_combat")
 			
 			createDisplayElem("classes", parent);
 			createDisplayElem("hitpoints", parent);

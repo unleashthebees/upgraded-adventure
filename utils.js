@@ -1,6 +1,6 @@
 function val(formula) {
 	try {
-		var result = eval(formula);
+		let result = eval(formula);
 		return result;
 	} catch (e) {
 		return formula;
@@ -38,14 +38,14 @@ function calculateSkill(skillname, ability) {
 }
 
 function createDisplayElem(attr, parentElem) {
-	var elem = $("<div></div>");
+	let elem = $("<div></div>");
 	elem.append(attr+": ");
 	elem.append(val(stats[attr]));
 	parentElem.append(elem);
 }
 
 function createSpellsElem(parentElem) {
-	var elem = $("<div></div>");
+	let elem = $("<div></div>");
 	elem.append("MAGIC");
 
 	parentElem.append(elem);
