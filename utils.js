@@ -44,6 +44,22 @@ function createDisplayElem(attr, parentElem) {
 	parentElem.append(elem);
 }
 
+function createAttackDisplayElem(key, parentElem) {
+	let elem = $("<div></div>");
+	let attack = stats.attacks[key];
+	let dmgBonus = applyAdjustments(0, "DMG");
+
+	if (attack.type.includes("ranged")) {
+		dmgBonus = applyAdjustments(dmgBonus, "RANGED_DMG");
+	}
+	if (attack.type.includes("bow")) {
+		dmgBonus = applyAdjustments(dmgBonus, "BOW_DMG");
+	}
+
+	elem.append("Attack: "+key+" Damage: "+attack.dice+" bonus: "+dmgBonus);
+	parentElem.append(elem);
+}
+
 function createSkillsTable() {
 	let tableElem = $("<table></table>");
 	for (let skill in stats.skills) {

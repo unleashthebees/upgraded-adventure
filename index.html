@@ -57,7 +57,7 @@
 			selected traits
 			replaced class/race feats
 			conditional bonuses
-			attacks / weapons
+			inventory
 		*/
 
 
@@ -125,12 +125,26 @@
 				availability: "item"
 			},
 			{
-				data: ["ATK+1", "DMG+1"],
-				type: "enhancement",
-				source: "Composite Longbow +1 holy",
+				data: ["BOW_ATK+2", "BOW_DMG+1"],
+				type: "competence",
+				source: "Greater Bracers of Archery",
 				availability: "item"
 			}
 		];
+
+		stats.attacks = {
+			bow: {
+				dice: "d8+2",
+				extra: "holy",
+				source: "item",
+				type: "ranged bow piercing magic"
+			},
+			dagger: {
+				dice: "d4",
+				source: "item",
+				type: "melee piercing slashing"
+			}
+		};
 
 		// other values
 		stats.totalSTR = applyAdjustments(stats.STR, "STR");
@@ -182,6 +196,9 @@
 			
 			//createSpellsElem(parent);
 
+			for (let atk in stats.attacks) {
+				createAttackDisplayElem(atk, parent);
+			}
 		}
 
 		showCombatStats();
