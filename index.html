@@ -33,7 +33,7 @@
 		stats.FOR = "SAVE_GOOD(stats.clvl)";
 		stats.REF = "SAVE_POOR(stats.clvl)";
 		stats.WIL = "SAVE_GOOD(stats.clvl)";
-		stats.skillsPerLevel = 2;
+		stats.skillsRanksAvailable = "2*stats.clvl";
 
 		stats.skillranks = {
 			diplomacy: 1,
@@ -56,7 +56,6 @@
 			selected feats
 			selected traits
 			replaced class/race feats
-			class skills
 			conditional bonuses
 			attacks / weapons
 		*/
@@ -148,6 +147,9 @@
 
 		stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
+		stats.skillRanksOpen = applyAdjustments(
+			val(stats.skillsRanksAvailable), "SKILLRANKS") - sumValues(stats.skillranks);
+
 		stats.skills = {};
 
 		calculateSkill("stealth", "DEX");
@@ -174,6 +176,7 @@
 			createDisplayElem("testValue", parent);
 			createDisplayElem("testToHitRanged", parent);
 			createDisplayElem("",parent);
+			createDisplayElem("skillRanksOpen", parent);
 			console.log("stealth: "+stats.skills.stealth);
 			parent.append(createSkillsTable());
 			

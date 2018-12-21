@@ -59,3 +59,12 @@ function createSpellsElem(parentElem) {
 
 	parentElem.append(elem);
 }
+
+function sumValues(obj) {
+	let result = 0;
+	for (let i in obj) {
+		result += obj[i];
+	}
+
+	return result;
+}
