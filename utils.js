@@ -49,13 +49,19 @@ function createDisplayElem(attr, parentElem) {
 function createAttackDisplayElem(key, parentElem) {
 	let elem = $("<div></div>");
 	let attack = stats.attacks[key];
+	let bab = val(stats.BAB);
 
-	let atkBonus = sumBonus("ATK") + val(stats.BAB) + (attack.toHit||0);
+	let atkBonus = sumBonus("ATK") + bab + (attack.toHit||0);
 	let dmgBonus = sumBonus("DMG");
+
+	let extra_attacks = sumBonus("HASTE");
 	
 	if (attack.type.includes("ranged")) {
 		atkBonus += STAT_MOD(stats.totalDEX) + sumBonus("RANGED_ATK");
 		dmgBonus += sumBonus("RANGED_DMG");
+		if (sumBonus("RANGED_HASTE") > 0) {
+			extra_attacks += 1;
+		}
 	}
 	if (attack.type.includes("bow")) {
 		atkBonus += sumBonus("BOW_ATK");
@@ -63,11 +69,21 @@ function createAttackDisplayElem(key, parentElem) {
 	}
 	if (attack.type.includes("melee")) {
 		atkBonus += STAT_MOD(stats.totalSTR);
+		dmgBonus += STAT_MOD(stats.totalSTR);
+	}
+
+	let iteratives = "";
+
+	for (let i = -5; bab + i >= 0; i -= 5) {
+		iteratives += "/" +(atkBonus+i);
+	}
+	for (let i = 0; i < extra_attacks; ++i) {
+		iteratives = "/" + atkBonus + iteratives;
 	}
 
 	elem.append("Attack: " + key + " Damage: " + attack.dice +
 		"+" + dmgBonus + " " + (attack.extra||"") +
-		" | toHit:" + atkBonus);
+		" | toHit:" + atkBonus + iteratives);
 	parentElem.append(elem);
 }
 
