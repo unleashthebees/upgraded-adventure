@@ -61,7 +61,7 @@
 		*/
 
 
-		stats.adjustments = [
+		stats.bonuses = [
 			{
 				data: ["CON-2", "INT+2", "DEX+2"],
 				type: "",
@@ -165,37 +165,31 @@
 		};
 
 		// other values
-		stats.totalSTR = applyAdjustments(stats.STR, "STR");
-		stats.totalDEX = applyAdjustments(stats.DEX, "DEX");
-		stats.totalCON = applyAdjustments(stats.CON, "CON");
-		stats.totalINT = applyAdjustments(stats.INT, "INT");
-		stats.totalWIS = applyAdjustments(stats.WIS, "WIS");
-		stats.totalCHA = applyAdjustments(stats.CHA, "CHA");
+		stats.totalSTR = stats.STR + sumBonus("STR");
+		stats.totalDEX = stats.DEX + sumBonus("DEX");
+		stats.totalCON = stats.CON + sumBonus("CON");
+		stats.totalINT = stats.INT + sumBonus("INT");
+		stats.totalWIS = stats.WIS + sumBonus("WIS");
+		stats.totalCHA = stats.CHA + sumBonus("CHA");
 
 		// TODO: size mods
-		stats.totalCMB = applyAdjustments(
-			val(stats.BAB) + STAT_MOD(stats.totalSTR), "CMB");
-		stats.totalCMD = applyAdjustments(
-			10 + val(stats.BAB) + STAT_MOD(stats.totalSTR) +
-			STAT_MOD(stats.totalDEX), "CMD");
+		stats.totalCMB = val(stats.BAB) + STAT_MOD(stats.totalSTR) + sumBonus("CMB");
+		stats.totalCMD = 10 + val(stats.BAB) + STAT_MOD(stats.totalSTR) +
+			STAT_MOD(stats.totalDEX) + sumBonus("CMD");
 
-		stats.totalINI = applyAdjustments(STAT_MOD(stats.totalDEX), "INI");
+		stats.totalINI = STAT_MOD(stats.totalDEX) + sumBonus("INI");
 
-		stats.totalFOR = applyAdjustments(
-			STAT_MOD(stats.totalCON) + val(stats.FOR), "FOR");
-		stats.totalREF = applyAdjustments(
-			STAT_MOD(stats.totalDEX) + val(stats.REF), "REF");
-		stats.totalWIL = applyAdjustments(
-			STAT_MOD(stats.totalWIS) + val(stats.WIL), "WIL");
+		stats.totalFOR = STAT_MOD(stats.totalCON) + val(stats.FOR) + sumBonus("FOR");
+		stats.totalREF = STAT_MOD(stats.totalDEX) + val(stats.REF) + sumBonus("REF");
+		stats.totalWIL = STAT_MOD(stats.totalWIS) + val(stats.WIL) + sumBonus("WIL");
 
-		stats.totalAC = applyAdjustments(
-			10 + Math.min(applyAdjustments(0, "MAXDEXBONUS"),
-			STAT_MOD(stats.totalDEX)), "AC");
+		stats.totalAC = 10 + sumBonus("AC") +
+			Math.min(sumBonus("MAXDEXBONUS"), STAT_MOD(stats.totalDEX));
 
 		stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
-		stats.skillRanksOpen = applyAdjustments(
-			val(stats.skillsRanksAvailable), "SKILLRANKS") - sumValues(stats.skillranks);
+		stats.skillRanksOpen = sumBonus("SKILLRANKS") +
+			val(stats.skillsRanksAvailable) - sumValues(stats.skillranks);
 
 		stats.skills = {};
 

@@ -7,18 +7,18 @@ function val(formula) {
 	}
 }
 
-// todo: add explanation of adjustments to gui
-function applyAdjustments(baseValue, baseStat) {
-	let result = baseValue;
-	for (let i in stats.adjustments) {
-		let adj = stats.adjustments[i];
+// todo: add explanation of bonuses to gui
+function sumBonus(keyword) {
+	let result = 0;
+	for (let i in stats.bonuses) {
+		let adj = stats.bonuses[i];
 		for (let idata in adj.data) {
 			let str = adj.data[idata];
 			let pos = str.search(/[+-]/);
 			let stat = str.substr(0,pos).trim();
 			let formula = str.substr(pos).trim();
-			if (baseStat == stat) {
-				console.log("adjust stat: "+baseStat+" "+formula);
+			if (keyword == stat) {
+				console.log("adjust stat: "+keyword+" "+formula);
 				let expr = "result"+formula;
 				result = eval(expr);
 			}
@@ -29,12 +29,12 @@ function applyAdjustments(baseValue, baseStat) {
 
 function calculateSkill(skillname, ability) {
 	let ranks = stats.skillranks[skillname];
-	let classSkillbonus = applyAdjustments(0, "cs_"+skillname);
+	let classSkillbonus = sumBonus("cs_"+skillname);
 
 	if (ranks > 0) {
 		stats.skills[skillname] =
 			STAT_MOD(stats["total" + ability]) +
-			applyAdjustments(ranks+classSkillbonus, skillname);
+			ranks + classSkillbonus + sumBonus(skillname);
 	}
 }
 
@@ -48,13 +48,13 @@ function createDisplayElem(attr, parentElem) {
 function createAttackDisplayElem(key, parentElem) {
 	let elem = $("<div></div>");
 	let attack = stats.attacks[key];
-	let dmgBonus = applyAdjustments(0, "DMG");
+	let dmgBonus = sumBonus("DMG");
 	
 	if (attack.type.includes("ranged")) {
-		dmgBonus = applyAdjustments(dmgBonus, "RANGED_DMG");
+		dmgBonus += sumBonus("RANGED_DMG");
 	}
 	if (attack.type.includes("bow")) {
-		dmgBonus = applyAdjustments(dmgBonus, "BOW_DMG");
+		dmgBonus += sumBonus("BOW_DMG");
 	}
 
 	elem.append("Attack: "+key+" Damage: "+attack.dice+" bonus: "+dmgBonus);
