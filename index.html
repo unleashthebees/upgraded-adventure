@@ -129,6 +129,24 @@
 				type: "competence",
 				source: "Greater Bracers of Archery",
 				availability: "item"
+			},
+			{
+				data: ["FOR+2", "REF+2", "WIL+2"],
+				type: "resistance",
+				source: "Holy Aura",
+				availability: "constant"
+			},
+			{
+				data: ["AC+2"],
+				type: "deflection",
+				source: "Holy Aura",
+				availability: "constant"
+			},
+			{
+				data: ["AC+5", "MAXDEXBONUS+6"],
+				type: "armor",
+				source: "Mithral Chain Shirt +1",
+				availability: "item"
 			}
 		];
 
@@ -154,10 +172,25 @@
 		stats.totalWIS = applyAdjustments(stats.WIS, "WIS");
 		stats.totalCHA = applyAdjustments(stats.CHA, "CHA");
 
-		stats.totalATK = applyAdjustments(0, "ATK");
+		// TODO: size mods
+		stats.totalCMB = applyAdjustments(
+			val(stats.BAB) + STAT_MOD(stats.totalSTR), "CMB");
+		stats.totalCMD = applyAdjustments(
+			10 + val(stats.BAB) + STAT_MOD(stats.totalSTR) +
+			STAT_MOD(stats.totalDEX), "CMD");
 
-		stats.testValue = SPELLS_PER_DAY_PREPARED_FULLCASTER(stats.clvl)[1];
-		stats.testToHitRanged = val(stats.BAB) + STAT_MOD(stats.totalDEX) + stats.totalATK;
+		stats.totalINI = applyAdjustments(STAT_MOD(stats.totalDEX), "INI");
+
+		stats.totalFOR = applyAdjustments(
+			STAT_MOD(stats.totalCON) + val(stats.FOR), "FOR");
+		stats.totalREF = applyAdjustments(
+			STAT_MOD(stats.totalDEX) + val(stats.REF), "REF");
+		stats.totalWIL = applyAdjustments(
+			STAT_MOD(stats.totalWIS) + val(stats.WIL), "WIL");
+
+		stats.totalAC = applyAdjustments(
+			10 + Math.min(applyAdjustments(0, "MAXDEXBONUS"),
+			STAT_MOD(stats.totalDEX)), "AC");
 
 		stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
@@ -175,6 +208,7 @@
 			$("#"+$(this).attr("data-content-tab")).show();
 		});
 
+		// TODO: arrange fields or let them be arranged (drag&drop or dropdown > send to tab X)
 		function showCombatStats() {
 			let parent = $("#content_combat")
 			
@@ -187,8 +221,14 @@
 			createDisplayElem("totalINT", parent);
 			createDisplayElem("totalWIS", parent);
 			createDisplayElem("totalCHA", parent);
-			createDisplayElem("testValue", parent);
-			createDisplayElem("testToHitRanged", parent);
+			createDisplayElem("totalCMB", parent);
+			createDisplayElem("totalCMD", parent);
+			createDisplayElem("totalINI", parent);
+			createDisplayElem("totalFOR", parent);
+			createDisplayElem("totalREF", parent);
+			createDisplayElem("totalWIL", parent);
+			createDisplayElem("totalAC", parent);
+			
 			createDisplayElem("",parent);
 			createDisplayElem("skillRanksOpen", parent);
 			console.log("stealth: "+stats.skills.stealth);
