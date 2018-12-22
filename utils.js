@@ -48,16 +48,25 @@ function createDisplayElem(attr, parentElem) {
 function createAttackDisplayElem(key, parentElem) {
 	let elem = $("<div></div>");
 	let attack = stats.attacks[key];
+
+	let atkBonus = sumBonus("ATK") + val(stats.BAB) + (attack.toHit||0);
 	let dmgBonus = sumBonus("DMG");
 	
 	if (attack.type.includes("ranged")) {
+		atkBonus += STAT_MOD(stats.totalDEX) + sumBonus("RANGED_ATK");
 		dmgBonus += sumBonus("RANGED_DMG");
 	}
 	if (attack.type.includes("bow")) {
+		atkBonus += sumBonus("BOW_ATK");
 		dmgBonus += sumBonus("BOW_DMG");
 	}
+	if (attack.type.includes("melee")) {
+		atkBonus += STAT_MOD(stats.totalSTR);
+	}
 
-	elem.append("Attack: "+key+" Damage: "+attack.dice+" bonus: "+dmgBonus);
+	elem.append("Attack: " + key + " Damage: " + attack.dice +
+		"+" + dmgBonus + " " + (attack.extra||"") +
+		" | toHit:" + atkBonus);
 	parentElem.append(elem);
 }
 

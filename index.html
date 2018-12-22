@@ -107,6 +107,12 @@
 				availability: "off"
 			},
 			{
+				data: ["RANGED_ATK-2", "BOW_DMG+4"],
+				type: "",
+				source: "Deadly Aim",
+				availability: "off"
+			},
+			{
 				data: ["DEX+2"],
 				type: "enhancement",
 				source: "Belt of Incredible Dexterity",
@@ -151,7 +157,8 @@
 		];
 
 		stats.attacks = {
-			bow: {
+			composite_bow: {
+				toHit: 1,
 				dice: "d8+2",
 				extra: "holy",
 				source: "item",
