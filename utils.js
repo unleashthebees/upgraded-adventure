@@ -7,6 +7,7 @@ function val(formula) {
 	}
 }
 
+// todo: add explanation of adjustments to gui
 function applyAdjustments(baseValue, baseStat) {
 	let result = baseValue;
 	for (let i in stats.adjustments) {
@@ -44,12 +45,11 @@ function createDisplayElem(attr, parentElem) {
 	parentElem.append(elem);
 }
 
-// todo: add explanation of dmg
 function createAttackDisplayElem(key, parentElem) {
 	let elem = $("<div></div>");
 	let attack = stats.attacks[key];
 	let dmgBonus = applyAdjustments(0, "DMG");
-
+	
 	if (attack.type.includes("ranged")) {
 		dmgBonus = applyAdjustments(dmgBonus, "RANGED_DMG");
 	}
