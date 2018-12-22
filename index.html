@@ -239,7 +239,8 @@
 
 		// TODO: arrange fields or let them be arranged (drag&drop or dropdown > send to tab X)
 		function showCombatStats() {
-			let parent = $("#content_combat")
+			let parent = $("#content_combat");
+			parent.html("");
 			
 			createDisplayElem("classes", parent);
 			createDisplayElem("hitpoints", parent);
@@ -260,13 +261,19 @@
 			
 			createDisplayElem("",parent);
 			createDisplayElem("skillRanksOpen", parent);
-			console.log("stealth: "+stats.skills.stealth);
 			parent.append(createSkillsTable());
 			
 			//createSpellsElem(parent);
 
 			for (let atk in stats.attacks) {
 				createAttackDisplayElem(atk, parent);
+			}
+
+			for (let key in stats.bonuses) {
+				let bonus = stats.bonuses[key];
+				if ("on" == bonus.availability || "off" == bonus.availability) {
+					createBonusSwitchElem(bonus, parent);
+				}
 			}
 		}
 

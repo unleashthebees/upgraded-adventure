@@ -88,6 +88,21 @@ function createAttackDisplayElem(key, parentElem) {
 	parentElem.append(elem);
 }
 
+function createBonusSwitchElem(bonus, parentElem) {
+	let switchElem = $("<div>"+bonus.source+": "+bonus.availability+"</div>");
+
+	switchElem.click(function() {
+		console.log("switch");
+		switch(bonus.availability) {
+			case "on": bonus.availability = "off"; break;
+			case "off": bonus.availability = "on"; break;
+		}
+		showCombatStats();
+	});
+
+	parentElem.append(switchElem);
+}
+
 function createSkillsTable() {
 	let tableElem = $("<table></table>");
 	for (let skill in stats.skills) {
