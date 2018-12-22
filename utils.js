@@ -11,16 +11,17 @@ function val(formula) {
 function sumBonus(keyword) {
 	let result = 0;
 	for (let i in stats.bonuses) {
-		let adj = stats.bonuses[i];
-		for (let idata in adj.data) {
-			let str = adj.data[idata];
-			let pos = str.search(/[+-]/);
-			let stat = str.substr(0,pos).trim();
-			let formula = str.substr(pos).trim();
-			if (keyword == stat) {
-				console.log("adjust stat: "+keyword+" "+formula);
-				let expr = "result"+formula;
-				result = eval(expr);
+		let bonus = stats.bonuses[i];
+		if (bonus.availability != "off") {
+			for (let idata in bonus.data) {
+				let str = bonus.data[idata];
+				let pos = str.search(/[+-]/);
+				let stat = str.substr(0, pos).trim();
+				let formula = str.substr(pos).trim();
+				if (keyword == stat) {
+					let expr = "result" + formula;
+					result = eval(expr);
+				}
 			}
 		}
 	}
