@@ -44,6 +44,7 @@ function createDisplayElem(attr, parentElem) {
 	parentElem.append(elem);
 }
 
+// todo: add explanation of dmg
 function createAttackDisplayElem(key, parentElem) {
 	let elem = $("<div></div>");
 	let attack = stats.attacks[key];
