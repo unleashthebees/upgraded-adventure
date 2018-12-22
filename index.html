@@ -127,6 +127,18 @@
 				availability: "constant"
 			},
 			{
+				data: ["cs_perception +3", "perception +1"],
+				type: "trait",
+				source: "Eyes and Ears of the City (Trait)",
+				availability: "constant"
+			},
+			{
+				data: ["perception+2"],
+				type: "racial",
+				source: "Keen Senses (Elven Racial)",
+				availability: "constant"
+			},
+			{
 				data: ["stealth +5"],
 				type: "competence",
 				source: "Cloak of Elvenkind",
@@ -205,6 +217,7 @@
 		calculateSkill("stealth", "DEX");
 		calculateSkill("heal", "WIS");
 		calculateSkill("knowledge_religion", "INT");
+		calculateSkill("perception", "WIS");
 
 		$(".tab_header").click(function() {
 			$(".tab_content").hide();
