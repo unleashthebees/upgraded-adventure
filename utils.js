@@ -45,6 +45,7 @@ function createDisplayElem(attr, parentElem) {
 	parentElem.append(elem);
 }
 
+// TODO: iterative attacks
 function createAttackDisplayElem(key, parentElem) {
 	let elem = $("<div></div>");
 	let attack = stats.attacks[key];
