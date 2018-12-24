@@ -39,9 +39,9 @@ function calculateSkill(skillname, ability) {
 	}
 }
 
-function createDisplayElem(attr, parentElem) {
+function createDisplayElem(displayName, attr, parentElem) {
 	let elem = $("<div></div>");
-	elem.append(attr+": ");
+	elem.append(displayName+": ");
 	elem.append(val(stats[attr]));
 	parentElem.append(elem);
 }
@@ -53,7 +53,7 @@ function createAttackDisplayElem(key, parentElem) {
 	let bab = val(stats.BAB);
 
 	let atkBonus = sumBonus("ATK") + bab + (attack.toHit||0);
-	let dmgBonus = sumBonus("DMG");
+	let dmgBonus = sumBonus("DMG") + (attack.toDmg||0);
 
 	let extra_attacks = sumBonus("HASTE");
 	
@@ -107,9 +107,23 @@ function createSkillsTable() {
 	let tableElem = $("<table></table>");
 	for (let skill in stats.skills) {
 		let bonus = stats.skills[skill];
-		tableElem.append("<tr><td>"+skill+"</td><td>"+bonus+"</td></tr>");
+		tableElem.append("<tr><td>" +
+			skillNameMapping(skill) + "</td><td>" +
+			bonus + "</td></tr>");
 	}
 	return tableElem;
+}
+
+function skillNameMapping(from) {
+	let to = {
+		stealth: "Stealth",
+		heal: "Heal",
+		knowledge_religion: "Knowledge (Religion)",
+		perception: "Perception",
+	}[from];
+
+	if (undefined == to) return from;
+	return to;
 }
 
 function createSpellsElem(parentElem) {

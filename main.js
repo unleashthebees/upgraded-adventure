@@ -105,7 +105,7 @@ stats.bonuses = [
 	{
 		data: ["HASTE+1"],
 		type: "haste",
-		source: "Blessing of Fervor",
+		source: "Blessing of Fervor (extra attack)",
 		availability: "off"
 	},
 	{
@@ -167,7 +167,8 @@ stats.bonuses = [
 stats.attacks = {
 	composite_bow: {
 		toHit: 1,
-		dice: "d8+2",
+		dice: "d8",
+		toDmg: 2,
 		extra: "holy",
 		source: "item",
 		type: "ranged bow piercing magic"
@@ -223,25 +224,23 @@ function showCombatStats() {
 	let parent = $("#content_combat");
 	parent.html("");
 	
-	createDisplayElem("classes", parent);
-	createDisplayElem("hitpoints", parent);
-	createDisplayElem("BAB", parent);
-	createDisplayElem("totalSTR", parent);
-	createDisplayElem("totalDEX", parent);
-	createDisplayElem("totalCON", parent);
-	createDisplayElem("totalINT", parent);
-	createDisplayElem("totalWIS", parent);
-	createDisplayElem("totalCHA", parent);
-	createDisplayElem("totalCMB", parent);
-	createDisplayElem("totalCMD", parent);
-	createDisplayElem("totalINI", parent);
-	createDisplayElem("totalFOR", parent);
-	createDisplayElem("totalREF", parent);
-	createDisplayElem("totalWIL", parent);
-	createDisplayElem("totalAC", parent);
-	
-	createDisplayElem("",parent);
-	createDisplayElem("skillRanksOpen", parent);
+	createDisplayElem("Classes", "classes", parent);
+	createDisplayElem("Hitpoints", "hitpoints", parent);
+	createDisplayElem("BAB", "BAB", parent);
+	createDisplayElem("STR", "totalSTR", parent);
+	createDisplayElem("DEX", "totalDEX", parent);
+	createDisplayElem("CON", "totalCON", parent);
+	createDisplayElem("INT", "totalINT", parent);
+	createDisplayElem("WIS", "totalWIS", parent);
+	createDisplayElem("CHA", "totalCHA", parent);
+	createDisplayElem("CMB", "totalCMB", parent);
+	createDisplayElem("CMD", "totalCMD", parent);
+	createDisplayElem("INI", "totalINI", parent);
+	createDisplayElem("FOR", "totalFOR", parent);
+	createDisplayElem("REF", "totalREF", parent);
+	createDisplayElem("WIL", "totalWIL", parent);
+	createDisplayElem("AC", "totalAC", parent);
+	//createDisplayElem("", "skillRanksOpen", parent);
 	parent.append(createSkillsTable());
 	
 	//createSpellsElem(parent);
