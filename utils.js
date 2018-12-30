@@ -96,7 +96,7 @@ function createBonusSwitchElem(bonus, parentElem) {
 			case "on": bonus.availability = "off"; break;
 			case "off": bonus.availability = "on"; break;
 		}
-		showCombatStats();
+		refreshAll();
 	});
 
 	parentElem.append(switchElem);
