@@ -1,4 +1,5 @@
 var stats;
+var exportedKeys = [];
 
 function loadCharacter(filename) {
 	console.log("loadCharacter "+filename);
@@ -8,7 +9,8 @@ function loadCharacter(filename) {
 		console.log("loaded name: "+characterSheet.name);
 
 		stats = characterSheet;
-		calcStatblock();
+		exportedKeys = Object.keys(characterSheet);
+		calcDerivedValues();
 		refreshAll();
 	};
 	scriptElem.src=filename;
@@ -28,7 +30,7 @@ function loadCharacter(filename) {
 		clvl based values
 	*/
 
-function calcStatblock() {
+function calcDerivedValues() {
 	// other values
 	stats.totalSTR = stats.STR + sumBonus("STR");
 	stats.totalDEX = stats.DEX + sumBonus("DEX");
@@ -111,11 +113,31 @@ function createExportTab() {
 	let parent = $("#content_export");
 	parent.html("");
 
-	let jsonStr = "let characterSheet = " + JSON.stringify(stats, undefined, "\t");
+	//let exportData = stats;
+	let exportData = {};
+	for (key in stats) {
+		if (exportedKeys.includes(key)) {
+			exportData[key] = stats[key];
+		}
+	}
 
+	let exportStr = "let characterSheet = " +
+		JSON.stringify(exportData, undefined, "\t")
+		+ ";";
+	// replace quotes
+	exportStr = exportStr.replace(/\"([^"]+)\":/g,"$1:");
+
+	// remove some whitespace in arrays if they are short enough
+	exportStr = exportStr.replace(/\[[^\[\]]{1,80}\]/g,
+		function(m) { console.log(m);
+			return m.replace(/\n/g, "")
+				.replace(/\s{1,}/g, " ")
+				.replace(/\[ /g, "[").replace(/ \]/g, "]");
+		}
+	);
+	
 	let inputElem = $("<textarea></textarea>");
-
-	inputElem.val(jsonStr);
+	inputElem.val(exportStr);
 
 	parent.append(inputElem);
 }

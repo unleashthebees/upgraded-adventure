@@ -1,7 +1,7 @@
 let characterSheet = {
 	name: "Elenna",
 	classes: "Cleric 9",
-	HD: [8,6,8,6,6,8,5,8,3],
+	HD: [8, 6, 8, 6, 6, 8, 5, 8, 3],
 	clvl: 9,
 	STR: 13,
 	DEX: 17,
@@ -26,7 +26,7 @@ let characterSheet = {
 		sense_motive: 1,
 		spellcraft: 1,
 		stealth: 8,
-		survival: 1,
+		survival: 1
 	},
 	bonuses: [
 		{
@@ -160,5 +160,5 @@ let characterSheet = {
 			source: "item",
 			type: "melee piercing slashing"
 		}
-	},
+	}
 };
