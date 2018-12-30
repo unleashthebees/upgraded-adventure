@@ -68,7 +68,7 @@ let characterSheet = {
 			availability: "constant"
 		},
 		{
-			data: ["ATK+3", "DMG+3"], // TODO: clvl based values
+			data: ["ATK+3", "DMG+3"],
 			type: "luck",
 			source: "Divine Favor",
 			availability: "off"
@@ -95,10 +95,10 @@ let characterSheet = {
 			data: ["DEX+2"],
 			type: "enhancement",
 			source: "Belt of Incredible Dexterity",
-			availability: "item" // TODO: item slots (overview / slot usage)
+			availability: "item"
 		},
 		{
-			data: ["cs_stealth +3", "stealth +1"], // TODO: conditional extra +1
+			data: ["cs_stealth +3", "stealth +1"],
 			type: "trait",
 			source: "Highlander (Trait)",
 			availability: "constant"

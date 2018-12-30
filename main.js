@@ -24,6 +24,8 @@ function loadCharacter(filename) {
 		replaced class/race feats
 		conditional bonuses
 		inventory
+		item slots (overview / slot usage)
+		clvl based values
 	*/
 
 function calcStatblock() {
@@ -109,7 +111,7 @@ function createExportTab() {
 	let parent = $("#content_export");
 	parent.html("");
 
-	let jsonStr = JSON.stringify(stats,undefined,"\t");
+	let jsonStr = "let characterSheet = " + JSON.stringify(stats, undefined, "\t");
 
 	let inputElem = $("<textarea></textarea>");
 
