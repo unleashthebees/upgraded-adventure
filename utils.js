@@ -92,7 +92,6 @@ function createBonusSwitchElem(bonus, parentElem) {
 	let switchElem = $("<div>"+bonus.source+": "+bonus.availability+"</div>");
 
 	switchElem.click(function() {
-		console.log("switch");
 		switch(bonus.availability) {
 			case "on": bonus.availability = "off"; break;
 			case "off": bonus.availability = "on"; break;
