@@ -13,3 +13,8 @@ table {
 	font-family: Roboto;
 	font-size: 14px;
 }
+
+textarea {
+	width: 90%;
+	height: 50%;
+}

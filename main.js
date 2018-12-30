@@ -10,6 +10,8 @@ function loadCharacter(filename) {
 		stats = characterSheet;
 		calcStatblock();
 		showCombatStats();
+
+		createExportTab();
 	};
 	scriptElem.src=filename;
 	document.head.appendChild(scriptElem);
@@ -104,5 +106,17 @@ $(".tab_header").click(function() {
 	$(".tab_content").hide();
 	$("#"+$(this).attr("data-content-tab")).show();
 });
+
+function createExportTab() {
+	let parent = $("#content_export");
+
+	let jsonStr = JSON.stringify(stats,undefined,"\t");
+
+	let inputElem = $("<textarea></textarea>");
+
+	inputElem.val(jsonStr);
+
+	parent.append(inputElem);
+}
 
 loadCharacter("characters/elenna.js");
