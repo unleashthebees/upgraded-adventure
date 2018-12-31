@@ -129,7 +129,7 @@ function createExportTab() {
 
 	// remove some whitespace in arrays if they are short enough
 	exportStr = exportStr.replace(/\[[^\[\]]{1,80}\]/g,
-		function(m) { console.log(m);
+		function(m) {
 			return m.replace(/\n/g, "")
 				.replace(/\s{1,}/g, " ")
 				.replace(/\[ /g, "[").replace(/ \]/g, "]");
