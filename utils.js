@@ -21,7 +21,7 @@ function sumBonus(keyword) {
 		let bonus = stats.bonuses[i];
 		if (bonus.availability != "off") {
 			for (let idata in bonus.data) {
-				let [stat,formula] = splitBonusFormula(bonus.data[idata]);
+				let [stat, formula] = splitBonusFormula(bonus.data[idata]);
 				if (keyword == stat) {
 					let expr = "result" + formula;
 					result = eval(expr);
@@ -30,6 +30,20 @@ function sumBonus(keyword) {
 		}
 	}
 	return result;
+}
+
+function explainBonus(keyword) {
+	for (let i in stats.bonuses) {
+		let bonus = stats.bonuses[i];
+		if (bonus.availability != "off") {
+			for (let idata in bonus.data) {
+				let [stat, formula] = splitBonusFormula(bonus.data[idata]);
+				if (keyword == stat) {
+					console.log(formula+"("+bonus.source+")");
+				}
+			}
+		}
+	}
 }
 
 function calculateSkill(skillname, ability) {
