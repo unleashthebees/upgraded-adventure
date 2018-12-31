@@ -39,10 +39,13 @@ function calculateSkill(skillname, ability) {
 	}
 }
 
-function createDisplayElem(displayName, attr, parentElem) {
+function createDisplayElem(gridArea, displayName, attr, parentElem) {
 	let elem = $("<div></div>");
 	elem.append(displayName+": ");
 	elem.append(val(stats[attr]));
+	if (gridArea.length > 0) {
+		elem.attr("style", "grid-area: " + gridArea);
+	}
 	parentElem.append(elem);
 }
 

@@ -6,7 +6,7 @@ div {
 	padding: 1px;
 	font-family: Roboto;
 	font-size: 14px;
-	background-color: #dddddd;
+	
 }
 
 table {
@@ -17,4 +17,14 @@ table {
 textarea {
 	width: 90%;
 	height: 50%;
+}
+
+#content_combat {
+	display: grid;
+	grid-template-columns: auto auto auto auto auto;
+	grid-auto-flow: column;
+}
+
+#content_combat > div {
+	background-color: #dddddd;
 }

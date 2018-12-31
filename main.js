@@ -18,7 +18,6 @@ function loadCharacter(filename) {
 }
 
 /* missing input:
-		landspeed
 		selected domains
 		selected deity
 		selected feats
@@ -67,26 +66,33 @@ function calcDerivedValues() {
 }
 
 // TODO: arrange fields or let them be arranged (drag&drop or dropdown > send to tab X)
+// TODO: missing fields: touch AC, flat footed AC, movement speeds
 function showCombatStats() {
 	let parent = $("#content_combat");
 	parent.html("");
 	
-	createDisplayElem("Classes", "classes", parent);
-	createDisplayElem("Hitpoints", "hitpoints", parent);
-	createDisplayElem("BAB", "BAB", parent);
-	createDisplayElem("STR", "totalSTR", parent);
-	createDisplayElem("DEX", "totalDEX", parent);
-	createDisplayElem("CON", "totalCON", parent);
-	createDisplayElem("INT", "totalINT", parent);
-	createDisplayElem("WIS", "totalWIS", parent);
-	createDisplayElem("CHA", "totalCHA", parent);
-	createDisplayElem("CMB", "totalCMB", parent);
-	createDisplayElem("CMD", "totalCMD", parent);
-	createDisplayElem("INI", "totalINI", parent);
-	createDisplayElem("FOR", "totalFOR", parent);
-	createDisplayElem("REF", "totalREF", parent);
-	createDisplayElem("WIL", "totalWIL", parent);
-	createDisplayElem("AC", "totalAC", parent);
+	createDisplayElem("1/1/span 1/span 1", "Name", "name", parent);
+	createDisplayElem("1/2/span 1/span 1", "Classes", "classes", parent);
+
+	createDisplayElem("2/1/span 1/span 1", "STR", "totalSTR", parent);
+	createDisplayElem("3/1/span 1/span 1", "DEX", "totalDEX", parent);
+	createDisplayElem("4/1/span 1/span 1", "CON", "totalCON", parent);
+	createDisplayElem("5/1/span 1/span 1", "INT", "totalINT", parent);
+	createDisplayElem("6/1/span 1/span 1", "WIS", "totalWIS", parent);
+	createDisplayElem("7/1/span 1/span 1", "CHA", "totalCHA", parent);
+
+	createDisplayElem("2/2/span 1/span 1", "Hitpoints", "hitpoints", parent);
+	createDisplayElem("3/2/span 1/span 1", "INI", "totalINI", parent);
+	createDisplayElem("4/2/span 1/span 1", "AC", "totalAC", parent);
+	createDisplayElem("5/2/span 1/span 1", "FOR", "totalFOR", parent);
+	createDisplayElem("6/2/span 1/span 1", "REF", "totalREF", parent);
+	createDisplayElem("7/2/span 1/span 1", "WIL", "totalWIL", parent);
+	
+	
+	createDisplayElem("", "CMB", "totalCMB", parent);
+	createDisplayElem("", "CMD", "totalCMD", parent);
+
+	createDisplayElem("", "BAB", "BAB", parent);
 	//createDisplayElem("", "skillRanksOpen", parent);
 	parent.append(createSkillsTable());
 	
@@ -108,6 +114,7 @@ $(".tab_header").click(function() {
 	$(".tab_content").hide();
 	$("#"+$(this).attr("data-content-tab")).show();
 });
+$("#tab_combat").click();
 
 function createExportTab() {
 	let parent = $("#content_export");
