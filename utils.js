@@ -7,6 +7,13 @@ function val(formula) {
 	}
 }
 
+function splitBonusFormula(str) {
+	let pos = str.search(/[+-]/);
+	let stat = str.substr(0, pos).trim();
+	let formula = str.substr(pos).trim();
+	return [stat, formula];
+}
+
 // todo: add explanation of bonuses to gui
 function sumBonus(keyword) {
 	let result = 0;
@@ -14,10 +21,7 @@ function sumBonus(keyword) {
 		let bonus = stats.bonuses[i];
 		if (bonus.availability != "off") {
 			for (let idata in bonus.data) {
-				let str = bonus.data[idata];
-				let pos = str.search(/[+-]/);
-				let stat = str.substr(0, pos).trim();
-				let formula = str.substr(pos).trim();
+				let [stat,formula] = splitBonusFormula(bonus.data[idata]);
 				if (keyword == stat) {
 					let expr = "result" + formula;
 					result = eval(expr);
