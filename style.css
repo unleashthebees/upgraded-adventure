@@ -6,7 +6,6 @@ div {
 	padding: 1px;
 	font-family: Roboto;
 	font-size: 14px;
-	
 }
 
 table {
@@ -27,4 +26,18 @@ textarea {
 
 #content_combat > div {
 	background-color: #dddddd;
+}
+
+#tabs {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+#tabs > div {
+	background-color: #555555;
+	font-family: Cinzel;
+	font-size: 130%;
+	font-weight: bold;
+	color: #ffffff;
+	padding-left: 3%;
 }
