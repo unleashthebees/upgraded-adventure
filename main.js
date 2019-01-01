@@ -30,8 +30,33 @@ function loadCharacter(filename) {
 	*/
 
 function calcDerivedValues() {
-	// other values
-	stats.totalSTR = stats.STR + sumBonus("STR");
+	// use items
+	for (let i in stats.items) {
+		let item = stats.items[i];
+
+		if (item.bonus) {
+			console.log(item.bonus);
+			if (item.bonus.data) { // single bonus
+				console.log("1");
+				stats.bonuses[stats.bonuses.length] = {
+					data: item.bonus.data,
+					type: item.bonus.type,
+					availability: "item",
+					source: item.name
+				}
+			} else { // array of bonuses
+				console.log("2");
+				for (let ii in item.bonus) {
+					stats.bonuses[stats.bonuses.length] = {
+						data: item.bonus[ii].data,
+						type: item.bonus[ii].type,
+						availability: "item",
+						source: item.name
+					}
+				}
+			}
+		}
+	}
 	stats.totalDEX = stats.DEX + sumBonus("DEX");
 	stats.totalCON = stats.CON + sumBonus("CON");
 	stats.totalINT = stats.INT + sumBonus("INT");
