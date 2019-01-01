@@ -28,6 +28,20 @@ let characterSheet = {
 		stealth: 8,
 		survival: 1
 	},
+	items: [
+		{
+			name: "Cloak of Elvenkind",
+			slot: "shoulders",
+			bonus: {
+				data: ["stealth +5"],
+				type: "competence",
+			}
+		},
+		{
+			name: "Arrows",
+			quantity: 100
+		}
+	],
 	bonuses: [
 		{
 			data: ["CON-2", "INT+2", "DEX+2"],
@@ -114,12 +128,6 @@ let characterSheet = {
 			type: "racial",
 			source: "Keen Senses (Elven Racial)",
 			availability: "constant"
-		},
-		{
-			data: ["stealth +5"],
-			type: "competence",
-			source: "Cloak of Elvenkind",
-			availability: "item"
 		},
 		{
 			data: ["BOW_ATK+2", "BOW_DMG+1"],

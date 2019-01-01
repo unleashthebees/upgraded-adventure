@@ -51,6 +51,8 @@ function calcDerivedValues() {
 
 	stats.totalAC = 10 + sumBonus("AC") +
 		Math.min(sumBonus("MAXDEXBONUS"), STAT_MOD(stats.totalDEX));
+	/*stats.totalTouchAC = 10;
+	stats.totalFlatAC = 10;*/
 
 	stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
@@ -67,7 +69,7 @@ function calcDerivedValues() {
 
 // TODO: arrange fields or let them be arranged (drag&drop or dropdown > send to tab X)
 // TODO: missing fields: touch AC, flat footed AC, movement speeds
-function showCombatStats() {
+function refreshCombatStats() {
 	let parent = $("#content_combat");
 	parent.html("");
 	
@@ -87,7 +89,6 @@ function showCombatStats() {
 	createDisplayElem("5/2/span 1/span 1", "FOR", "totalFOR", parent);
 	createDisplayElem("6/2/span 1/span 1", "REF", "totalREF", parent);
 	createDisplayElem("7/2/span 1/span 1", "WIL", "totalWIL", parent);
-	
 	
 	createDisplayElem("", "CMB", "totalCMB", parent);
 	createDisplayElem("", "CMD", "totalCMD", parent);
@@ -110,13 +111,26 @@ function showCombatStats() {
 	}
 }
 
+function refreshBonusesTab() {
+	let parent = $("#content_bonuses");
+	parent.html("");
+
+	for (let i in stats.bonuses) {
+		let bonus = stats.bonuses[i];
+		let elem = $("<div></div>");
+		elem.append(bonus.source);
+		parent.append(elem);
+	}
+}
+
 $(".tab_header").click(function() {
 	$(".tab_content").hide();
 	$("#"+$(this).attr("data-content-tab")).show();
 });
 $("#tab_combat").click();
 
-function createExportTab() {
+// TODO: don't export items twice (as they appear again in bonuses)
+function refreshExportTab() {
 	let parent = $("#content_export");
 	parent.html("");
 
@@ -150,8 +164,9 @@ function createExportTab() {
 }
 
 function refreshAll() {
-	showCombatStats();
-	createExportTab();
+	refreshCombatStats();
+	refreshBonusesTab();
+	refreshExportTab();
 }
 
 loadCharacter("characters/elenna.js");
