@@ -17,7 +17,8 @@ function loadCharacter(filename) {
 	document.head.appendChild(scriptElem);
 }
 
-/* missing input:
+/* TODO: missing input:
+		phys. values (height/weight/hair/eyes/...)
 		selected domains
 		selected deity
 		selected feats
@@ -151,7 +152,6 @@ $(".tab_header").click(function() {
 });
 $("#tab_combat").click();
 
-// TODO: don't export items twice (as they appear again in bonuses)
 function refreshExportTab() {
 	let parent = $("#content_export");
 	parent.html("");
