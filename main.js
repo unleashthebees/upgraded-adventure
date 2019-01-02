@@ -33,11 +33,9 @@ function calcDerivedValues() {
 	// use items
 	for (let i in stats.items) {
 		let item = stats.items[i];
-
 		if (item.bonus) {
 			console.log(item.bonus);
 			if (item.bonus.data) { // single bonus
-				console.log("1");
 				stats.bonuses[stats.bonuses.length] = {
 					data: item.bonus.data,
 					type: item.bonus.type,
@@ -45,7 +43,6 @@ function calcDerivedValues() {
 					source: item.name
 				}
 			} else { // array of bonuses
-				console.log("2");
 				for (let ii in item.bonus) {
 					stats.bonuses[stats.bonuses.length] = {
 						data: item.bonus[ii].data,
@@ -92,8 +89,8 @@ function calcDerivedValues() {
 	calculateSkill("perception", "WIS");
 }
 
-// TODO: arrange fields or let them be arranged (drag&drop or dropdown > send to tab X)
 // TODO: missing fields: touch AC, flat footed AC, movement speeds
+// TODO: validators (with display) for used feats, used skill ranks, spell slots, ...
 function refreshCombatStats() {
 	let parent = $("#content_combat");
 	parent.html("");
@@ -159,7 +156,6 @@ function refreshExportTab() {
 	let parent = $("#content_export");
 	parent.html("");
 
-	//let exportData = stats;
 	let exportData = {};
 	for (key in stats) {
 		if (exportedKeys.includes(key)) {
