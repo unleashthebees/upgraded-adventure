@@ -10,7 +10,6 @@ function loadCharacter(filename) {
 
 		stats = characterSheet;
 		exportedKeys = Object.keys(characterSheet);
-		calcDerivedValues();
 		refreshAll();
 	};
 	scriptElem.src=filename;
@@ -25,6 +24,7 @@ function loadCharacter(filename) {
 		selected traits
 		replaced class/race feats
 		conditional bonuses
+		senses
 		inventory
 		item slots (overview / slot usage)
 		clvl based values
@@ -82,8 +82,11 @@ function calcDerivedValues() {
 
 	stats.totalAC = 10 + sumBonus("AC") +
 		Math.min(sumBonus("MAXDEXBONUS"), STAT_MOD(stats.totalDEX));
-	/*stats.totalTouchAC = 10;
-	stats.totalFlatAC = 10;*/
+	stats.totalTouchAC = stats.totalAC
+		- sumBonus("AC", "armor") - sumBonus("AC", "shield") - sumBonus("AC", "natural");
+	stats.totalFlatFootedAC = stats.totalAC - sumBonus("AC", "dodge") -
+		Math.min(sumBonus("MAXDEXBONUS"), STAT_MOD(stats.totalDEX));
+	// TODO: incorporeal touch AC ( = touch AC + armor from force effects)
 
 	stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
@@ -121,6 +124,8 @@ function refreshCombatStats() {
 	createDisplayElem("6/2/span 1/span 1", "REF", "totalREF", parent);
 	createDisplayElem("7/2/span 1/span 1", "WIL", "totalWIL", parent);
 	
+	createDisplayElem("4/3/span 1/span 1", "AC (touch)", "totalTouchAC", parent);
+	createDisplayElem("4/4/span 1/span 1", "AC (flat-footed)", "totalFlatFootedAC", parent);
 	createDisplayElem("", "CMB", "totalCMB", parent);
 	createDisplayElem("", "CMD", "totalCMD", parent);
 
