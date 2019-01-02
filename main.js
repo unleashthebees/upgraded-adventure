@@ -31,30 +31,38 @@ function loadCharacter(filename) {
 	*/
 
 function calcDerivedValues() {
-	// use items
-	for (let i in stats.items) {
-		let item = stats.items[i];
-		if (item.bonus) {
-			console.log(item.bonus);
-			if (item.bonus.data) { // single bonus
+	// use items and other sources for bonuses
+	stats.bonuses = [];
+	let sources = stats.items.concat(stats.innate);	
+	for (let i in sources) {
+		let source = sources[i];
+		if (source.bonus) {
+			if (source.bonus.data) { // single bonus
 				stats.bonuses[stats.bonuses.length] = {
-					data: item.bonus.data,
-					type: item.bonus.type,
-					availability: "item",
-					source: item.name
+					data: source.bonus.data,
+					type: source.bonus.type,
+					source: source.name
 				}
 			} else { // array of bonuses
-				for (let ii in item.bonus) {
+				for (let ii in source.bonus) {
 					stats.bonuses[stats.bonuses.length] = {
-						data: item.bonus[ii].data,
-						type: item.bonus[ii].type,
-						availability: "item",
-						source: item.name
+						data: source.bonus[ii].data,
+						type: source.bonus[ii].type,
+						source: source.name
 					}
 				}
 			}
 		}
 	}
+
+	// TODO: validate if any temporary bonus has an invalid source
+	stats.bonuses = stats.bonuses.concat(
+		stats.temporary.filter(x => x.state == "on"));
+	
+	// TODO: explain calculations e.g. with this:
+	//	stats.totalSTR = (()=>stats.STR + sumBonus("STR"))();
+	//	explainSTR = `base ${stats.STR} + ?? (bonuses)`;
+	stats.totalSTR = stats.STR + sumBonus("STR");
 	stats.totalDEX = stats.DEX + sumBonus("DEX");
 	stats.totalCON = stats.CON + sumBonus("CON");
 	stats.totalINT = stats.INT + sumBonus("INT");
@@ -117,19 +125,19 @@ function refreshCombatStats() {
 	createDisplayElem("", "CMD", "totalCMD", parent);
 
 	createDisplayElem("", "BAB", "BAB", parent);
-	//createDisplayElem("", "skillRanksOpen", parent);
+
 	parent.append(createSkillsTable());
 	
-	//createSpellsElem(parent);
+	// TODO: createSpellsElem(parent);
 
 	for (let atk in stats.attacks) {
 		createAttackDisplayElem(atk, parent);
 	}
 
-	for (let key in stats.bonuses) {
-		let bonus = stats.bonuses[key];
-		if ("on" == bonus.availability || "off" == bonus.availability) {
-			createBonusSwitchElem(bonus, parent);
+	for (let key in stats.temporary) {
+		let tmp = stats.temporary[key];
+		if ("on" == tmp.state || "off" == tmp.state) {
+			createSwitchElem(tmp, parent);
 		}
 	}
 }
@@ -185,6 +193,7 @@ function refreshExportTab() {
 }
 
 function refreshAll() {
+	calcDerivedValues();
 	refreshCombatStats();
 	refreshBonusesTab();
 	refreshExportTab();

@@ -34,124 +34,140 @@ let characterSheet = {
 			slot: "shoulders",
 			bonus: {
 				data: ["stealth +5"],
-				type: "competence",
+				type: "competence"
 			}
 		},
 		{
 			name: "Arrows",
 			quantity: 100
+		},
+		{
+			name: "Belt of Incredible Dexterity",
+			slot: "belt",
+			bonus: {
+				data: ["DEX+2"],
+				type: "enhancement"
+			}
+		},
+		{
+			name: "Greater Bracers of Archery",
+			slot: "wrists",
+			bonus: {
+				data: ["BOW_ATK+2", "BOW_DMG+1"],
+				type: "competence"
+			}
+		},
+		{
+			name: "Mithral Chain Shirt +1",
+			slot: "armor",
+			bonus: {
+				data: ["AC+5", "MAXDEXBONUS+6"],
+				type: "armor"
+			}
 		}
 	],
-	bonuses: [
+	innate: [
 		{
-			data: ["CON-2", "INT+2", "DEX+2"],
-			type: "",
-			source: "Ability Score Racial Traits",
-			availability: "constant"
+			name: "Ability Score Racial Traits",
+			bonus: {
+				data: ["CON-2", "INT+2", "DEX+2"],
+				type: ""
+			}
 		},
 		{
-			data: ["DEX+1", "WIS+1"],
-			type: "",
-			source: "Advancement (Levels 4,8)",
-			availability: "constant"
+			name: "Advancement (Levels 4,8)",
+			bonus: {
+				data: ["DEX+1", "WIS+1"],
+				type: ""
+			}
 		},
 		{
-			data: ["SKILLRANKS+9"],
-			type: "",
-			source: "Favored Class Bonus (Levels 1-9)",
-			availability: "constant"
+			name: "Favored Class Bonus (Levels 1-9)",
+			bonus: {
+				data: ["SKILLRANKS+9"],
+				type: ""
+			}
 		},
 		{
-			data: [
-				"cs_appraise +3",
-				"cs_craft +3",
-				"cs_diplomacy +3",
-				"cs_heal +3",
-				"cs_knowledge_arcana +3",
-				"cs_knowledge_history +3",
-				"cs_knowledge_nobility +3",
-				"cs_knowledge_planes +3",
-				"cs_knowledge_religion +3",
-				"cs_linguistics +3",
-				"cs_profession +3",
-				"cs_sense_motive +3",
-				"cs_spellcraft 3"
-			],
-			type: "",
-			source: "Class Skills (Cleric)",
-			availability: "constant"
+			name: "Class Skills (Cleric)",
+			bonus: {
+				data: [
+					"cs_appraise +3",
+					"cs_craft +3",
+					"cs_diplomacy +3",
+					"cs_heal +3",
+					"cs_knowledge_arcana +3",
+					"cs_knowledge_history +3",
+					"cs_knowledge_nobility +3",
+					"cs_knowledge_planes +3",
+					"cs_knowledge_religion +3",
+					"cs_linguistics +3",
+					"cs_profession +3",
+					"cs_sense_motive +3",
+					"cs_spellcraft 3"
+				],
+				type: ""
+			}
 		},
+		{
+			name: "Highlander (Trait)",
+			bonus: {
+				data: ["cs_stealth +3", "stealth +1"],
+				type: "trait"
+			}
+		},
+		{
+			name: "Eyes and Ears of the City (Trait)",
+			bonus: {
+				data: ["cs_perception +3", "perception +1"],
+				type: "trait"
+			}
+		},
+		{
+			name: "Keen Senses (Elven Racial)",
+			bonus: {
+				data: ["perception+2"],
+				type: "racial"
+			}
+		},
+		{
+			name: "Holy Aura",
+			bonus: [
+				{
+					data: ["FOR+2", "REF+2", "WIL+2"],
+					type: "resistance"
+				},
+				{
+					data: ["AC+2"],
+					type: "deflection"
+				}
+			]
+		}
+	],
+	temporary: [
 		{
 			data: ["ATK+3", "DMG+3"],
 			type: "luck",
 			source: "Divine Favor",
-			availability: "off"
+			state: "off"
 		},
 		{
 			data: ["RANGED_ATK-2", "BOW_DMG+4"],
 			type: "",
 			source: "Deadly Aim",
-			availability: "off"
+			state: "off"
 		},
 		{
 			data: ["RANGED_HASTE+1", "RANGED_ATK-2"],
 			type: "",
 			source: "Rapid Shot",
-			availability: "off"
+			state: "off"
 		},
 		{
 			data: ["HASTE+1"],
 			type: "haste",
 			source: "Blessing of Fervor (extra attack)",
-			availability: "off"
-		},
-		{
-			data: ["DEX+2"],
-			type: "enhancement",
-			source: "Belt of Incredible Dexterity",
-			availability: "item"
-		},
-		{
-			data: ["cs_stealth +3", "stealth +1"],
-			type: "trait",
-			source: "Highlander (Trait)",
-			availability: "constant"
-		},
-		{
-			data: ["cs_perception +3", "perception +1"],
-			type: "trait",
-			source: "Eyes and Ears of the City (Trait)",
-			availability: "constant"
-		},
-		{
-			data: ["perception+2"],
-			type: "racial",
-			source: "Keen Senses (Elven Racial)",
-			availability: "constant"
-		},
-		{
-			data: ["BOW_ATK+2", "BOW_DMG+1"],
-			type: "competence",
-			source: "Greater Bracers of Archery",
-			availability: "item"
-		},
-		{
-			data: ["FOR+2", "REF+2", "WIL+2"],
-			type: "resistance",
-			source: "Holy Aura",
-			availability: "constant"
-		},
-		{
-			data: ["AC+2"],
-			type: "deflection",
-			source: "Holy Aura",
-			availability: "constant"
-		},
-		{
-			data: ["AC+5", "MAXDEXBONUS+6"],
-			type: "armor",
-			source: "Mithral Chain Shirt +1",
-			availability: "item"
+			state: "off"
 		}
 	],
 	attacks: {

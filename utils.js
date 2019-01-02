@@ -108,13 +108,13 @@ function createAttackDisplayElem(key, parentElem) {
 	parentElem.append(elem);
 }
 
-function createBonusSwitchElem(bonus, parentElem) {
-	let switchElem = $("<div>"+bonus.source+": "+bonus.availability+"</div>");
+function createSwitchElem(toggle, parentElem) {
+	let switchElem = $("<div>"+toggle.source+": "+toggle.state+"</div>");
 
 	switchElem.click(function() {
-		switch(bonus.availability) {
-			case "on": bonus.availability = "off"; break;
-			case "off": bonus.availability = "on"; break;
+		switch(toggle.state) {
+			case "on": toggle.state = "off"; break;
+			case "off": toggle.state = "on"; break;
 		}
 		refreshAll();
 	});
