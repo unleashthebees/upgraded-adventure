@@ -15,11 +15,11 @@ function splitBonusFormula(str) {
 }
 
 // todo: add explanation of bonuses to gui
-function sumBonus(keyword) {
+function sumBonus(keyword, bonustype) {
 	let result = 0;
 	for (let i in stats.bonuses) {
 		let bonus = stats.bonuses[i];
-		if (bonus.availability != "off") {
+		if (!bonustype || bonustype == bonus.type) {
 			for (let idata in bonus.data) {
 				let [stat, formula] = splitBonusFormula(bonus.data[idata]);
 				if (keyword == stat) {
@@ -31,20 +31,18 @@ function sumBonus(keyword) {
 	}
 	return result;
 }
-
+/*
 function explainBonus(keyword) {
 	for (let i in stats.bonuses) {
 		let bonus = stats.bonuses[i];
-		if (bonus.availability != "off") {
-			for (let idata in bonus.data) {
-				let [stat, formula] = splitBonusFormula(bonus.data[idata]);
-				if (keyword == stat) {
-					console.log(formula+"("+bonus.source+")");
-				}
+		for (let idata in bonus.data) {
+			let [stat, formula] = splitBonusFormula(bonus.data[idata]);
+			if (keyword == stat) {
+				console.log(formula+"("+bonus.source+")");
 			}
 		}
 	}
-}
+}*/
 
 function calculateSkill(skillname, ability) {
 	let ranks = stats.skillranks[skillname];
