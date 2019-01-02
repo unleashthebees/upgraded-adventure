@@ -159,6 +159,13 @@ function refreshBonusesTab() {
 	}
 }
 
+function refreshSpellTab() {
+	let parent = $("#content_spells");
+	parent.html("");
+
+	
+}
+
 $(".tab_header").click(function() {
 	$(".tab_content").hide();
 	$("#"+$(this).attr("data-content-tab")).show();
@@ -201,6 +208,7 @@ function refreshAll() {
 	calcDerivedValues();
 	refreshCombatStats();
 	refreshBonusesTab();
+	refreshSpellTab();
 	refreshExportTab();
 }
 
