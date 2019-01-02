@@ -143,13 +143,6 @@ function skillNameMapping(from) {
 	return to;
 }
 
-function createSpellsElem(parentElem) {
-	let elem = $("<div></div>");
-	elem.append("MAGIC");
-
-	parentElem.append(elem);
-}
-
 function sumValues(obj) {
 	let result = 0;
 	for (let i in obj) {

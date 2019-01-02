@@ -132,8 +132,6 @@ function refreshCombatStats() {
 	createDisplayElem("", "BAB", "BAB", parent);
 
 	parent.append(createSkillsTable());
-	
-	// TODO: createSpellsElem(parent);
 
 	for (let atk in stats.attacks) {
 		createAttackDisplayElem(atk, parent);
@@ -163,14 +161,19 @@ function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
 
-	
+	let power = stats.spellcasting;
+
+	let clvl = stats.HD.length;
+	let spellsPerDay = val(power.slots+"("+clvl+")");
+
+	parent.append(clvl+" | " +spellsPerDay);
 }
 
 $(".tab_header").click(function() {
 	$(".tab_content").hide();
 	$("#"+$(this).attr("data-content-tab")).show();
 });
-$("#tab_combat").click();
+$("#tab_spells").click();
 
 function refreshExportTab() {
 	let parent = $("#content_export");
