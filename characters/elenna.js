@@ -147,13 +147,14 @@ let characterSheet = {
 	spellcasting: [
 		{
 			slots: "DOMAIN_SLOTS_FULLCASTER",
-			attribute: "WIS",
+			ability: "WIS",
 			accept: "domain"
 		},
 		{
 			slots: "SPELLS_PER_DAY_PREPARED_FULLCASTER",
-			attribute: "WIS",
-			accept: "divine"
+			ability: "WIS",
+			accept: "divine",
+			bonusSpells: true
 		}
 	],
 	temporary: [

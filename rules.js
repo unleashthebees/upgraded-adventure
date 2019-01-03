@@ -57,6 +57,6 @@ function DOMAIN_SLOTS_FULLCASTER(clvl) {
 	return slots;
 }
 
-function BONUS_SPELLS_PER_DAY(mod,slvl) {
-	return Math.max(0, Math.ceil((mod-slvl+1)/4));
+function BONUS_SPELLS_PER_DAY(mod, slvl) {
+	return Math.max(0, Math.ceil((mod - slvl + 1) / 4));
 }

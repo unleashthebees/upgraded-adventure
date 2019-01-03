@@ -170,13 +170,17 @@ function refreshSpellTab() {
 		let spellsPerDay = val(source.slots+"("+clvl+")");
 		console.log(spellsPerDay);
 
-		for (let i = 0; i < spellsPerDay.length; ++i) {
+		for (let slvl = 0; slvl < spellsPerDay.length; ++slvl) {
 			let slot = {
 				name: "",
-				level: i,
+				level: slvl,
 				accept: source.accept
 			}
-			stats.slots = stats.slots.concat(Array(spellsPerDay[i]).fill(slot));
+			let casterStatMod = STAT_MOD(val("stats.total"+source.ability));
+			let bonusSpells = (source.bonusSpells) ?
+				BONUS_SPELLS_PER_DAY(casterStatMod, slvl) : 0;
+			stats.slots = stats.slots
+				.concat(Array(spellsPerDay[slvl] + bonusSpells).fill(slot));
 		}
 
 	}
