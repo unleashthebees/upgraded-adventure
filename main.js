@@ -187,8 +187,6 @@ function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
 
-	
-
 	for (let i = 0; i < stats.slots.length; ++i) {
 		let elem = $("<div></div>");
 		let slot = stats.slots[i];
