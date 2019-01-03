@@ -161,19 +161,44 @@ function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
 
-	let power = stats.spellcasting;
+	stats.slots = [];
 
-	let clvl = stats.HD.length;
-	let spellsPerDay = val(power.slots+"("+clvl+")");
+	for (let isource in stats.spellcasting) {
+		let source = stats.spellcasting[isource];
+		let clvl = stats.HD.length;
 
-	parent.append(clvl+" | " +spellsPerDay);
+		let spellsPerDay = val(source.slots+"("+clvl+")");
+		console.log(spellsPerDay);
+
+		for (let i = 0; i < spellsPerDay.length; ++i) {
+			let slot = {
+				name: "",
+				level: i,
+				accept: source.accept
+			}
+			stats.slots = stats.slots.concat(Array(spellsPerDay[i]).fill(slot));
+		}
+
+	}
+	console.log(stats.slots);
+	stats.slots.sort((a,b)=>a.level > b.level);
+
+	for (let i = 0; i < stats.slots.length; ++i) {
+		let elem = $("<div></div>");
+		let slot = stats.slots[i];
+		elem.append(`${slot.level} ${slot.name} ${slot.accept}`);
+
+		parent.append(elem);
+	}
 }
 
-$(".tab_header").click(function() {
-	$(".tab_content").hide();
-	$("#"+$(this).attr("data-content-tab")).show();
-});
-$("#tab_spells").click();
+function initGUI() {
+	$(".tab_header").click(function() {
+		$(".tab_content").hide();
+		$("#" + $(this).attr("data-content-tab")).show();
+	});
+	$("#tab_spells").click();
+}
 
 function refreshExportTab() {
 	let parent = $("#content_export");
@@ -215,4 +240,5 @@ function refreshAll() {
 	refreshExportTab();
 }
 
+initGUI();
 loadCharacter("characters/elenna.js");

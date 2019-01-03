@@ -45,7 +45,16 @@ function SPELLS_PER_DAY_PREPARED_FULLCASTER(clvl) {
 	/* 18*/	[4,4,4,4,4,4,4,3,3,2],
 	/* 19*/	[4,4,4,4,4,4,4,4,3,3],
 	/* 20*/	[4,4,4,4,4,4,4,4,4,4]
-	][clvl];	
+	][clvl-1];	
+}
+
+function DOMAIN_SLOTS_FULLCASTER(clvl) {
+	let slots = SPELLS_PER_DAY_PREPARED_FULLCASTER(clvl);
+	for (let lvl in slots) {
+		if (0 == lvl) slots[lvl] = 0;
+		else slots[lvl] = 1;
+	}
+	return slots;
 }
 
 function BONUS_SPELLS_PER_DAY(mod,slvl) {
