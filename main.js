@@ -99,9 +99,35 @@ function calcDerivedValues() {
 	calculateSkill("heal", "WIS");
 	calculateSkill("knowledge_religion", "INT");
 	calculateSkill("perception", "WIS");
+
+	stats.slots = [];
+
+	for (let isource in stats.spellcasting) {
+		let source = stats.spellcasting[isource];
+		let clvl = stats.HD.length;
+
+		let spellsPerDay = val(source.slots+"("+clvl+")");
+		console.log(spellsPerDay);
+
+		for (let slvl = 0; slvl < spellsPerDay.length; ++slvl) {
+			let slot = {
+				name: "",
+				level: slvl,
+				accept: source.accept
+			}
+			let casterStatMod = STAT_MOD(val("stats.total"+source.ability));
+			let bonusSpells = (source.bonusSpells) ?
+				BONUS_SPELLS_PER_DAY(casterStatMod, slvl) : 0;
+			stats.slots = stats.slots
+				.concat(Array(spellsPerDay[slvl] + bonusSpells).fill(slot));
+		}
+
+	}
+	console.log(stats.slots);
+	stats.slots.sort((a,b)=>a.level > b.level);
 }
 
-// TODO: missing fields: touch AC, flat footed AC, movement speeds
+// TODO: missing fields: movement speeds
 // TODO: validators (with display) for used feats, used skill ranks, spell slots, ...
 function refreshCombatStats() {
 	let parent = $("#content_combat");
@@ -161,31 +187,7 @@ function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
 
-	stats.slots = [];
-
-	for (let isource in stats.spellcasting) {
-		let source = stats.spellcasting[isource];
-		let clvl = stats.HD.length;
-
-		let spellsPerDay = val(source.slots+"("+clvl+")");
-		console.log(spellsPerDay);
-
-		for (let slvl = 0; slvl < spellsPerDay.length; ++slvl) {
-			let slot = {
-				name: "",
-				level: slvl,
-				accept: source.accept
-			}
-			let casterStatMod = STAT_MOD(val("stats.total"+source.ability));
-			let bonusSpells = (source.bonusSpells) ?
-				BONUS_SPELLS_PER_DAY(casterStatMod, slvl) : 0;
-			stats.slots = stats.slots
-				.concat(Array(spellsPerDay[slvl] + bonusSpells).fill(slot));
-		}
-
-	}
-	console.log(stats.slots);
-	stats.slots.sort((a,b)=>a.level > b.level);
+	
 
 	for (let i = 0; i < stats.slots.length; ++i) {
 		let elem = $("<div></div>");
