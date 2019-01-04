@@ -15,7 +15,7 @@ table {
 
 textarea {
 	width: 90%;
-	height: 50%;
+	height: 90%;
 }
 
 #content_combat {
@@ -40,4 +40,20 @@ textarea {
 	font-weight: bold;
 	color: #ffffff;
 	padding-left: 3%;
+}
+
+.modal {
+	background-color: rgba(0,0,0,0.4);
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	padding-top: 10%;
+}
+
+.modal > div {
+	background-color: white;
+	width: 80%;
+	margin: auto;
 }

@@ -100,31 +100,41 @@ function calcDerivedValues() {
 	calculateSkill("knowledge_religion", "INT");
 	calculateSkill("perception", "WIS");
 
-	stats.slots = [];
+	stats.spellslots = [];
 
 	for (let isource in stats.spellcasting) {
 		let source = stats.spellcasting[isource];
 		let clvl = stats.HD.length;
 
 		let spellsPerDay = val(source.slots+"("+clvl+")");
-		console.log(spellsPerDay);
 
 		for (let slvl = 0; slvl < spellsPerDay.length; ++slvl) {
-			let slot = {
-				name: "",
-				level: slvl,
-				accept: source.accept
-			}
-			let casterStatMod = STAT_MOD(val("stats.total"+source.ability));
+			let casterStatMod = STAT_MOD(val("stats.total" + source.ability));
 			let bonusSpells = (source.bonusSpells) ?
 				BONUS_SPELLS_PER_DAY(casterStatMod, slvl) : 0;
-			stats.slots = stats.slots
-				.concat(Array(spellsPerDay[slvl] + bonusSpells).fill(slot));
+			for (let i = 0; i < spellsPerDay[slvl] + bonusSpells; ++i) {
+				let slot = {
+					name: "",
+					level: slvl,
+					accept: source.accept
+				}
+				stats.spellslots.push(slot);
+			}
 		}
-
 	}
-	console.log(stats.slots);
-	stats.slots.sort((a,b)=>a.level > b.level);
+	stats.spellslots.sort((a,b)=>a.level > b.level);
+
+	// prepare spells
+	for (let i in stats.prepared) {
+		let prepared = stats.prepared[i];
+		let possibleslots = findSlotForPreparedSpell(prepared);
+		if (possibleslots.length > 0) {
+			possibleslots[0].name = prepared.name;
+		} else {
+			// TODO: show this message in GUI
+			console.log("no slot found for "+prepared);
+		}
+	}
 }
 
 // TODO: missing fields: movement speeds
@@ -187,13 +197,55 @@ function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
 
-	for (let i = 0; i < stats.slots.length; ++i) {
-		let elem = $("<div></div>");
-		let slot = stats.slots[i];
-		elem.append(`${slot.level} ${slot.name} ${slot.accept}`);
+	for (let i = 0; i < stats.spellslots.length; ++i) {
+		let slotElem = $("<div></div>");
+		let slot = stats.spellslots[i];
+		slotElem.append(`${slot.level} ${slot.name} ${slot.accept}`);
+		slotElem.click(function() {
+			let modalElem = createModalWindow();
+			let spells = findSpellsForSpellSlot(slot);
+			for (let spell in spells) {
+				let spellSelectElem = $(`<div>${spell}</div>`);
+				spellSelectElem.data("slot", slot);
+				spellSelectElem.data("i", i);
+				spellSelectElem.click(function() {
+					console.log(spell);
+					slot.name = spell;
+					refreshAll();
+					console.log(slot);
+					console.log($(this).data("slot"));
+					console.log($(this).data("i"));
+					stats.spellslots[i] = slot;
 
-		parent.append(elem);
+					stats.prepared.push({
+						name: spell,
+						slot: slot.accept,
+						slotlevel: slot.level
+					});
+					refreshAll();
+				});
+				modalElem.append(spellSelectElem);
+			}
+		});
+
+		parent.append(slotElem);
 	}
+}
+
+function createModalWindow() {
+	let modalElem = $("<div></div>");
+	modalElem.addClass("modal");
+	modalElem.click(function(e) {
+		if (e.target == $(this)[0]) {
+			$(this).remove();	
+		}
+	});
+	$("body").append(modalElem);
+
+	let contentElem = $("<div></div>");
+	modalElem.append(contentElem);
+
+	return contentElem;
 }
 
 function initGUI() {

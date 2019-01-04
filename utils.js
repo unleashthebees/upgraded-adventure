@@ -151,3 +151,18 @@ function sumValues(obj) {
 
 	return result;
 }
+
+function findSpellsForSpellSlot(slot) {
+	console.log(slot);
+
+	let matching = stats.spells;
+	return matching;
+}
+
+function findSlotForPreparedSpell(preparedSpell) {
+	return stats.spellslots.filter(
+		x => (
+			x.name == "" &&
+			x.level == preparedSpell.slotlevel &&
+			x.accept == preparedSpell.slot));
+}

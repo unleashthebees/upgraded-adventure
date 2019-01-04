@@ -157,6 +157,32 @@ let characterSheet = {
 			bonusSpells: true
 		}
 	],
+	spells: {
+		"Divine Favor": {
+			name: "Divine Favor",
+			level: 1,
+			slot: "divine"
+		},
+		"Blessing of Fervor": {
+			level: 4,
+			slot: "divine"
+		},
+		"Fly": {
+			level: 3,
+			slot: "domain"
+		},
+		"Dispel Magic": {
+			level: 3,
+			slot: "divine"
+		}
+	},
+	prepared: [
+		{
+			name: "Divine Favor",
+			slot: "divine",
+			slotlevel: 1
+		}
+	],
 	temporary: [
 		{
 			data: ["ATK+3", "DMG+3"],
