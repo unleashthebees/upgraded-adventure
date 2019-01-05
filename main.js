@@ -276,14 +276,22 @@ function refreshExportTab() {
 		JSON.stringify(exportData, undefined, "\t")
 		+ ";";
 	// replace quotes
-	exportStr = exportStr.replace(/\"([^"]+)\":/g,"$1:");
+	exportStr = exportStr.replace(/\"([^\s"]+)\":/g,"$1:");
 
-	// remove some whitespace in arrays if they are short enough
+	// remove some whitespace in arrays if they are short enough (for [] brackets)
 	exportStr = exportStr.replace(/\[[^\[\]]{1,80}\]/g,
 		function(m) {
 			return m.replace(/\n/g, "")
 				.replace(/\s{1,}/g, " ")
 				.replace(/\[ /g, "[").replace(/ \]/g, "]");
+		}
+	);
+	// remove some whitespace in arrays if they are short enough (for {} brackets)
+	exportStr = exportStr.replace(/{[^{\[}]{1,80}}/g,
+		function(m) {
+			return m.replace(/\n/g, "")
+				.replace(/\s{1,}/g, " ")
+				.replace(/{ /g, "{").replace(/ }/g, "}");
 		}
 	);
 	

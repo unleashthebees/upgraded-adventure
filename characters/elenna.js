@@ -37,10 +37,7 @@ let characterSheet = {
 				type: "competence"
 			}
 		},
-		{
-			name: "Arrows",
-			quantity: 100
-		},
+		{name: "Arrows", quantity: 100},
 		{
 			name: "Belt of Incredible Dexterity",
 			slot: "belt",
@@ -145,11 +142,7 @@ let characterSheet = {
 		}
 	],
 	spellcasting: [
-		{
-			slots: "DOMAIN_SLOTS_FULLCASTER",
-			ability: "WIS",
-			accept: "domain"
-		},
+		{slots: "DOMAIN_SLOTS_FULLCASTER", ability: "WIS", accept: "domain"},
 		{
 			slots: "SPELLS_PER_DAY_PREPARED_FULLCASTER",
 			ability: "WIS",
@@ -158,31 +151,14 @@ let characterSheet = {
 		}
 	],
 	spells: {
-		"Create Water": { level: 0, slot: "divine" },
-		"Divine Favor": {
-			level: 1,
-			slot: "divine"
-		},
-		"Fly": {
-			level: 3,
-			slot: "domain"
-		},
-		"Dispel Magic": {
-			level: 3,
-			slot: "divine"
-		},
-		"Blessing of Fervor": {
-			level: 4,
-			slot: "divine"
-		}
+		"Create Water": {level: 0, slot: "divine"},
+		"Expeditious Retreat": {level: 0, slot: "domain"},
+		"Divine Favor": {level: 1, slot: "divine"},
+		Fly: {level: 3, slot: "domain"},
+		"Dispel Magic": {level: 3, slot: "divine"},
+		"Blessing of Fervor": {level: 4, slot: "divine"}
 	},
-	prepared: [
-		{
-			name: "Divine Favor",
-			slot: "divine",
-			slotlevel: 1
-		}
-	],
+	prepared: [{name: "Divine Favor", slot: "divine", slotlevel: 1}],
 	temporary: [
 		{
 			data: ["ATK+3", "DMG+3"],
@@ -218,10 +194,6 @@ let characterSheet = {
 			source: "item",
 			type: "ranged bow piercing magic"
 		},
-		dagger: {
-			dice: "d4",
-			source: "item",
-			type: "melee piercing slashing"
-		}
+		dagger: {dice: "d4", source: "item", type: "melee piercing slashing"}
 	}
 };
