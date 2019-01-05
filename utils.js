@@ -153,10 +153,15 @@ function sumValues(obj) {
 }
 
 function findSpellsForSpellSlot(slot) {
-	console.log(slot);
+	let allSpellNames = Object.keys(stats.spells);
+	let filtered = allSpellNames.filter(
+		x => (
+			stats.spells[x].level <= slot.level &&
+			stats.spells[x].slot == slot.accept));
 
-	let matching = stats.spells;
-	return matching;
+	let result = {}
+	filtered.map(x => result[x] = stats.spells[x]);
+	return result;
 }
 
 function findSlotForPreparedSpell(preparedSpell) {
