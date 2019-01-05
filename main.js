@@ -258,10 +258,13 @@ function initGUI() {
 		$(".tab_content").hide();
 		$("#" + $(this).attr("data-content-tab")).show();
 	});
-	$("#tab_spells").click();
+	$("#tab_export").click();
 }
 
+// TODO: add import button to this tab
 function refreshExportTab() {
+	let exportPrefix = "characterSheet = ";
+
 	let parent = $("#content_export");
 	parent.html("");
 
@@ -272,9 +275,8 @@ function refreshExportTab() {
 		}
 	}
 
-	let exportStr = "let characterSheet = " +
-		JSON.stringify(exportData, undefined, "\t")
-		+ ";";
+	let exportStr = exportPrefix + JSON.stringify(exportData, undefined, "\t");
+
 	// replace quotes
 	exportStr = exportStr.replace(/\"([^\s"]+)\":/g,"$1:");
 
@@ -297,8 +299,14 @@ function refreshExportTab() {
 	
 	let inputElem = $("<textarea></textarea>");
 	inputElem.val(exportStr);
-
 	parent.append(inputElem);
+
+	let importElem = $("<div>Import</div>");
+	importElem.click(function() {
+		stats = eval(inputElem.val());
+		refreshAll();
+	});
+	parent.append(importElem);
 }
 
 function refreshAll() {

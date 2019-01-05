@@ -1,4 +1,4 @@
-let characterSheet = {
+characterSheet = {
 	name: "Elenna",
 	classes: "Cleric 9",
 	HD: [8, 6, 8, 6, 6, 8, 5, 8, 3],
@@ -196,4 +196,4 @@ let characterSheet = {
 		},
 		dagger: {dice: "d4", source: "item", type: "melee piercing slashing"}
 	}
-};
+}
