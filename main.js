@@ -257,8 +257,14 @@ function initGUI() {
 	$(".tab_header").click(function() {
 		$(".tab_content").hide();
 		$("#" + $(this).attr("data-content-tab")).show();
+		localStorage.setItem("currentTab", $(this).attr("id"));
 	});
-	$("#tab_export").click();
+	let previousTab = localStorage.getItem("currentTab");
+	if (previousTab) {
+		$("#" + previousTab).click();
+	} else {
+		$("#tab_export").click();
+	}
 }
 
 // TODO: add import button to this tab
@@ -310,6 +316,7 @@ function refreshExportTab() {
 }
 
 function refreshAll() {
+	localStorage.setItem("stats", JSON.stringify(stats));
 	calcDerivedValues();
 	refreshCombatStats();
 	refreshBonusesTab();
@@ -318,4 +325,13 @@ function refreshAll() {
 }
 
 initGUI();
-loadCharacter("characters/elenna.js");
+
+let locallyStored = localStorage.getItem("stats");
+if (locallyStored) {
+	console.log("found locally stored version");
+	stats = JSON.parse(locallyStored);
+	exportedKeys = Object.keys(stats);
+	refreshAll();
+} else {
+	loadCharacter("characters/elenna.js");
+}
