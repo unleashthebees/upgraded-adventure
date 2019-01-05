@@ -205,7 +205,8 @@ function refreshSpellTab() {
 			let modalElem = createModalWindow();
 			let spells = findSpellsForSpellSlot(slot);
 			for (let spell in spells) {
-				let spellSelectElem = $(`<div>${spell}</div>`);
+				let spellSelectElem =
+					$(`<div>Prepare ${spell} (Level ${spells[spell].level})</div>`);
 				spellSelectElem.data("slot", slot);
 				spellSelectElem.data("i", i);
 				spellSelectElem.click(function() {
