@@ -91,6 +91,8 @@ function calcDerivedValues() {
 
 	stats.skills = {};
 
+	// TODO: mark if a skill is not trained
+	// TODO: add other skills
 	calculateSkill("stealth", "DEX");
 	calculateSkill("heal", "WIS");
 	calculateSkill("knowledge_religion", "INT");
@@ -163,6 +165,7 @@ function refreshCombatStats() {
 
 	createDisplayElem("", "BAB", "BAB", parent);
 
+	// TODO: add grid-area property to all elements
 	parent.append(createSkillsTable());
 
 	for (let atk in stats.attacks) {
@@ -172,13 +175,17 @@ function refreshCombatStats() {
 	for (let key in stats.temporary) {
 		let tmp = stats.temporary[key];
 		if ("on" == tmp.state || "off" == tmp.state) {
+			// TODO: better highlight of states off/on
 			createSwitchElem(tmp, parent);
 		}
 	}
 }
 
-function refreshBonusesTab() {
-	let parent = $("#content_bonuses");
+// TODO: add filters to select between displays (checkboxes)
+// TODO: add display of inventory
+// TODO: add display of innate abilities
+function refreshDetailsTab() {
+	let parent = $("#content_details");
 	parent.html("");
 
 	for (let i in stats.bonuses) {
@@ -314,7 +321,7 @@ function refreshAll() {
 	localStorage.setItem("stats", JSON.stringify(stats));
 	calcDerivedValues();
 	refreshCombatStats();
-	refreshBonusesTab();
+	refreshDetailsTab();
 	refreshSpellTab();
 	refreshExportTab();
 }
