@@ -89,6 +89,8 @@ function calcDerivedValues() {
 	stats.skillRanksOpen = sumBonus("SKILLRANKS") +
 		val(stats.skillsRanksAvailable) - sumValues(stats.skillranks);
 
+	stats.totalSpeedLand = 30 + sumBonus("LANDSPEED");
+
 	stats.skills = {};
 
 	// TODO: mark if a skill is not trained
@@ -135,7 +137,7 @@ function calcDerivedValues() {
 	}
 }
 
-// TODO: missing fields: movement speeds
+// TODO: missing fields: non-land-movement speeds
 // TODO: validators (with display) for used feats, used skill ranks, spell slots, ...
 function refreshCombatStats() {
 	let parent = $("#content_combat");
@@ -152,6 +154,7 @@ function refreshCombatStats() {
 	createDisplayElem("7/1/span 1/span 1", "CHA", "totalCHA", parent);
 
 	createDisplayElem("2/2/span 1/span 1", "Hitpoints", "hitpoints", parent);
+	createDisplayElem("2/3/span 1/span 1", "Speed", "totalSpeedLand", parent, "ft");
 	createDisplayElem("3/2/span 1/span 1", "INI", "totalINI", parent);
 	createDisplayElem("4/2/span 1/span 1", "AC", "totalAC", parent);
 	createDisplayElem("5/2/span 1/span 1", "FOR", "totalFOR", parent);

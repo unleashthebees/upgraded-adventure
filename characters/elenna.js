@@ -128,6 +128,13 @@ characterSheet = {
 			}
 		},
 		{
+			name: "Travel Domain",
+			bonus: {
+				data: ["LANDSPEED+10"],
+				type: ""
+			}
+		},
+		{
 			name: "Holy Aura",
 			bonus: [
 				{
