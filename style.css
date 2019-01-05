@@ -57,3 +57,12 @@ textarea {
 	width: 80%;
 	margin: auto;
 }
+
+.modal-title {
+	background-color: #555555;
+	font-family: Cinzel;
+	font-size: 130%;
+	font-weight: bold;
+	color: #ffffff;
+	padding-left: 3%;
+}

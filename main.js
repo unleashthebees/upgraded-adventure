@@ -203,6 +203,10 @@ function refreshSpellTab() {
 		slotElem.append(`${slot.level} ${slot.name} ${slot.accept}`);
 		slotElem.click(function() {
 			let modalElem = createModalWindow();
+			let modalTitleElem = $(`<div>Spellslot: ${slot.accept} ${slot.level}</div>`);
+			modalTitleElem.addClass("modal-title");
+			modalElem.append(modalTitleElem);
+
 			let spells = findSpellsForSpellSlot(slot);
 			for (let spell in spells) {
 				let spellSelectElem =
