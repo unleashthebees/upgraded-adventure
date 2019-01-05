@@ -267,7 +267,6 @@ function initGUI() {
 	}
 }
 
-// TODO: add import button to this tab
 function refreshExportTab() {
 	let exportPrefix = "characterSheet = ";
 
