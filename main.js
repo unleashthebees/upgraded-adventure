@@ -175,7 +175,6 @@ function refreshCombatStats() {
 	for (let key in stats.temporary) {
 		let tmp = stats.temporary[key];
 		if ("on" == tmp.state || "off" == tmp.state) {
-			// TODO: better highlight of states off/on
 			createSwitchElem(tmp, parent);
 		}
 	}

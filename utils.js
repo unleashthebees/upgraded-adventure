@@ -107,7 +107,11 @@ function createAttackDisplayElem(key, parentElem) {
 }
 
 function createSwitchElem(toggle, parentElem) {
-	let switchElem = $("<div>"+toggle.source+": "+toggle.state+"</div>");
+	let toggleMapping = {
+		"on": "&#9745;",
+		"off": "&#9744;"
+	};
+	let switchElem = $(`<div>${toggleMapping[toggle.state]} ${toggle.source}</div>`);
 
 	switchElem.click(function() {
 		switch(toggle.state) {
