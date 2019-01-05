@@ -158,13 +158,9 @@ let characterSheet = {
 		}
 	],
 	spells: {
+		"Create Water": { level: 0, slot: "divine" },
 		"Divine Favor": {
-			name: "Divine Favor",
 			level: 1,
-			slot: "divine"
-		},
-		"Blessing of Fervor": {
-			level: 4,
 			slot: "divine"
 		},
 		"Fly": {
@@ -173,6 +169,10 @@ let characterSheet = {
 		},
 		"Dispel Magic": {
 			level: 3,
+			slot: "divine"
+		},
+		"Blessing of Fervor": {
+			level: 4,
 			slot: "divine"
 		}
 	},

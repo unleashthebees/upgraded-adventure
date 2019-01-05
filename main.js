@@ -210,7 +210,7 @@ function refreshSpellTab() {
 			let spells = findSpellsForSpellSlot(slot);
 			for (let spell in spells) {
 				let spellSelectElem =
-					$(`<div>Prepare ${spell} (Level ${spells[spell].level})</div>`);
+					$(`<div>Prepare: ${spell} (Level ${spells[spell].level})</div>`);
 				spellSelectElem.data("slot", slot);
 				spellSelectElem.data("i", i);
 				spellSelectElem.click(function() {
