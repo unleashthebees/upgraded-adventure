@@ -2,12 +2,8 @@ var stats;
 var exportedKeys = [];
 
 function loadCharacter(filename) {
-	console.log("loadCharacter "+filename);
-	// TODO: test what happens if this is called multiple times
 	var scriptElem = document.createElement("script");
 	scriptElem.onload = function() {
-		console.log("loaded name: "+characterSheet.name);
-
 		stats = characterSheet;
 		exportedKeys = Object.keys(characterSheet);
 		refreshAll();
@@ -327,7 +323,6 @@ initGUI();
 
 let locallyStored = localStorage.getItem("stats");
 if (locallyStored) {
-	console.log("found locally stored version");
 	stats = JSON.parse(locallyStored);
 	exportedKeys = Object.keys(stats);
 	refreshAll();
