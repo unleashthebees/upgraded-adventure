@@ -42,6 +42,11 @@ textarea {
 	padding-left: 3%;
 }
 
+div.spellslot {
+	display: inline-block;
+	background-color: #dddddd;
+}
+
 .modal {
 	background-color: rgba(0,0,0,0.4);
 	position: fixed;

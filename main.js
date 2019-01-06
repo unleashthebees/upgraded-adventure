@@ -205,15 +205,20 @@ function refreshDetailsTab() {
 	}
 }
 
-// todo: other daily powers
+// TODO: un-prepare slot
+// TODO: use a slot (but retain the spell info)
+// TODO: add linebreaks between spellslots
+// TODO: more details on spellslot-elements (and highlight depending on state)
+// TODO: other daily powers
 function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
 
 	for (let i = 0; i < stats.spellslots.length; ++i) {
-		let slotElem = $("<div></div>");
 		let slot = stats.spellslots[i];
+		let slotElem = $("<div></div>");
 		slotElem.append(`${slot.level} ${slot.name} ${slot.accept}`);
+		slotElem.addClass("spellslot");
 		slotElem.click(function() {
 			let modalElem = createModalWindow();
 			let modalTitleElem = $(`<div>Spellslot: ${slot.accept} ${slot.level}</div>`);
