@@ -205,7 +205,7 @@ function refreshDetailsTab() {
 	}
 }
 
-// TODO: un-prepare slot
+// TODO: order spells in prep-modal window by highest level, then alphabetically
 // TODO: use a slot (but retain the spell info)
 // TODO: add linebreaks between spellslots
 // TODO: more details on spellslot-elements (and highlight depending on state)
@@ -216,8 +216,7 @@ function refreshSpellTab() {
 
 	for (let i = 0; i < stats.spellslots.length; ++i) {
 		let slot = stats.spellslots[i];
-		let slotElem = $("<div></div>");
-		slotElem.append(`${slot.level} ${slot.name} ${slot.accept}`);
+		let slotElem = $(`<div>${slot.level} ${slot.name} ${slot.accept}</div>`);
 		slotElem.addClass("spellslot");
 		slotElem.click(function() {
 			let modalElem = createModalWindow();
@@ -240,6 +239,7 @@ function refreshSpellTab() {
 					console.log($(this).data("i"));
 					stats.spellslots[i] = slot;
 
+// FIXME: limit this if it would prepare more spells than spellslots available
 					stats.prepared.push({
 						name: spell,
 						slot: slot.accept,
