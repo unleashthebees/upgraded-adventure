@@ -250,8 +250,20 @@ function refreshSpellTab() {
 				modalElem.append(spellSelectElem);
 			}
 		});
-
 		parent.append(slotElem);
+	}
+	parent.append("<div/>");
+	// POWERS
+	let powerSources = stats.innate.concat(stats.items);
+	for (let key in powerSources) {
+		let source = powerSources[key];
+		if (source.power) {
+			// TODO: make powers usable (=reduce count by 1)
+			let usesStr = source.power.uses_per_day?`${val(source.power.uses_per_day)}x `:"";
+			let powerElem = $(`<div>${usesStr}${source.name}</div>`);
+			powerElem.addClass("spellslot");
+			parent.append(powerElem);
+		}
 	}
 }
 

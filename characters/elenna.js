@@ -128,6 +128,12 @@ characterSheet = {
 			}
 		},
 		{
+			name: "Channel Energy",
+			power: {
+				uses_per_day: "3+STAT_MOD(stats.totalCHA)"
+			}
+		},
+		{
 			name: "Travel Domain",
 			bonus: {
 				data: ["LANDSPEED+10"],
