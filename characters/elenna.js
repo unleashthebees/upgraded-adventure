@@ -61,6 +61,12 @@ characterSheet = {
 				data: ["AC+5", "MAXDEXBONUS+6"],
 				type: "armor"
 			}
+		},
+		{
+			name: "Metamagic Rod of Extend (Lesser)",
+			power: {
+				uses_per_day: 3
+			}
 		}
 	],
 	innate: [
@@ -164,12 +170,26 @@ characterSheet = {
 		}
 	],
 	spells: {
-		"Create Water": {level: 0, slot: "divine"},
-		"Expeditious Retreat": {level: 0, slot: "domain"},
-		"Divine Favor": {level: 1, slot: "divine"},
-		Fly: {level: 3, slot: "domain"},
-		"Dispel Magic": {level: 3, slot: "divine"},
-		"Blessing of Fervor": {level: 4, slot: "divine"}
+		"Expeditious Retreat": { level: 1, slot: "domain" },
+		"Locate Object": { level: 2, slot: "domain" },
+		Fly: { level: 3, slot: "domain" },
+		"Locate Creature": { level: 4, slot: "domain" },
+		Teleport: { level: 5, slot: "domain" },
+		"Break Enchantment": { level: 5, slot: "domain" },
+		"Create Water": { level: 0, slot: "divine" },
+		"Detect Magic": { level: 0, slot: "divine" },
+		"Purify Food and Drink": { level: 0, slot: "divine" },
+		"Guidance": { level: 0, slot: "divine" },
+		"Divine Favor": { level: 1, slot: "divine" },
+		"Comprehend Languages": { level: 1, slot: "divine" },
+		"Obscuring Mist": { level: 1, slot: "divine" },
+		"Protection From Evil": { level: 1, slot: "divine" },
+		"Protection from Elements": { level: 2, slot: "divine" },
+		"Grace": { level: 2, slot: "divine" },
+		"Lesser Restoration": { level: 2, slot: "divine" },
+		"Dispel Magic": { level: 3, slot: "divine" },
+		"Blessing of Fervor": { level: 4, slot: "divine" },
+		"Breath of Life": { level: 5, slot: "divine" }
 	},
 	prepared: [{name: "Divine Favor", slot: "divine", slotlevel: 1}],
 	temporary: [
