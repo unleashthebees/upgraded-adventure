@@ -190,14 +190,22 @@ function refreshDetailsTab() {
 	let parent = $("#content_details");
 	parent.html("");
 
-	for (let i in stats.bonuses) {
+	/*for (let i in stats.bonuses) {
 		let bonus = stats.bonuses[i];
 		let elem = $("<div></div>");
 		elem.append(bonus.source);
 		parent.append(elem);
+	}*/
+	for (let i in stats.items) {
+		let item = stats.items[i];
+		let quantityStr = item.quantity?item.quantity+"x ":"";
+		let slotStr = item.slot?`(${item.slot})`:"";
+		let elem = $(`<div>${quantityStr}${item.name} ${slotStr}</div>`);
+		parent.append(elem);
 	}
 }
 
+// todo: other daily powers
 function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
