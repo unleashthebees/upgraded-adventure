@@ -195,6 +195,8 @@ function refreshDetailsTab() {
 	let parent = $("#content_details");
 	parent.html("");
 
+	showValidatorInfo(parent);
+
 	/*for (let i in stats.bonuses) {
 		let bonus = stats.bonuses[i];
 		let elem = $("<div></div>");
@@ -207,7 +209,20 @@ function refreshDetailsTab() {
 		let slotStr = item.slot?`(${item.slot})`:"";
 		let elem = $(`<div>${quantityStr}${item.name} ${slotStr}</div>`);
 		parent.append(elem);
+		var flag = true;
 	}
+
+	if (flag) parent.append("<hr>");
+
+	for (let i in stats.innate) {
+		let innate = stats.innate[i];
+		let elem = $(`<div>${innate.name}</div>`);
+		parent.append(elem);
+	}
+}
+
+function showValidatorInfo(parent) {
+	parent.append("stuff is missing!");
 }
 
 // TODO: order spells in prep-modal window by highest level, then alphabetically
@@ -230,14 +245,14 @@ function refreshSpellTab() {
 	for (let i = 0; i < stats.spellslots.length; ++i) {
 		let slot = stats.spellslots[i];
 		if (prepareMode || slot.name.length > 0) {
-		let slotElem = $(`<div>${slot.level} ${slot.name} ${slot.accept}</div>`);
-		slotElem.addClass("spellslot");
+			let slotElem = $(`<div>${slot.level} ${slot.name} ${slot.accept}</div>`);
+			slotElem.addClass("spellslot");
 			if (slot.used) slotElem.addClass("strikethrough");
-		slotElem.click(function() {
-			let modalElem = createModalWindow();
-			let modalTitleElem = $(`<div>Spellslot: ${slot.accept} ${slot.level}</div>`);
-			modalTitleElem.addClass("modal-title");
-			modalElem.append(modalTitleElem);
+			slotElem.click(function() {
+				let modalElem = createModalWindow();
+				let modalTitleElem = $(`<div>Spellslot: ${slot.accept} ${slot.level}</div>`);
+				modalTitleElem.addClass("modal-title");
+				modalElem.append(modalTitleElem);
 
 				if (slot.name.length > 0 && prepareMode) {
 					unprepareElem = $(`<div>Unprepare this spell (${slot.name})</div>`);
@@ -257,27 +272,27 @@ function refreshSpellTab() {
 				}
 				
 				if (prepareMode) {
-			let spells = findSpellsForSpellSlot(slot);
-			for (let spell in spells) {
-				let spellSelectElem =
-					$(`<div>Prepare: ${spell} (Level ${spells[spell].level})</div>`);
-				spellSelectElem.data("slot", slot);
-				spellSelectElem.data("i", i);
-				spellSelectElem.click(function() {
-					slot.name = spell;
-					refreshAll();
-					stats.spellslots[i] = slot;
+					let spells = findSpellsForSpellSlot(slot);
+					for (let spell in spells) {
+						let spellSelectElem =
+							$(`<div>Prepare: ${spell} (Level ${spells[spell].level})</div>`);
+						spellSelectElem.data("slot", slot);
+						spellSelectElem.data("i", i);
+						spellSelectElem.click(function() {
+							slot.name = spell;
+							refreshAll();
+							stats.spellslots[i] = slot;
 
-// FIXME: limit this if it would prepare more spells than spellslots available
-					stats.prepared.push({
-						name: spell,
-						slot: slot.accept,
-						slotlevel: slot.level
-					});
-					refreshAll();
-				});
-				modalElem.append(spellSelectElem);
-			}
+							// FIXME: limit this if it would prepare more spells than spellslots available
+							stats.prepared.push({
+								name: spell,
+								slot: slot.accept,
+								slotlevel: slot.level
+							});
+							refreshAll();
+						});
+						modalElem.append(spellSelectElem);
+					}
 				} else {
 					// TODO: order used spells to the back of the list
 					// TODO: display DC of spell
@@ -299,12 +314,12 @@ function refreshSpellTab() {
 							console.log(filtered[0]);
 							refreshAll();
 						}
-		});
+					});
 					modalElem.append(castElem);
 				}
 			});
-		parent.append(slotElem);
-	}
+			parent.append(slotElem);
+		}
 	}
 	parent.append("<div/>");
 	// POWERS
@@ -415,12 +430,12 @@ let loadChar = urlParams.get("c");
 if (loadChar) {
 	loadCharacter(loadChar);
 } else {
-let locallyStored = localStorage.getItem("stats");
-if (locallyStored) {
-	stats = JSON.parse(locallyStored);
-	exportedKeys = Object.keys(stats);
-	refreshAll();
-} else {
-	loadCharacter("characters/elenna.js");
-}
+	let locallyStored = localStorage.getItem("stats");
+	if (locallyStored) {
+		stats = JSON.parse(locallyStored);
+		exportedKeys = Object.keys(stats);
+		refreshAll();
+	} else {
+		loadCharacter("characters/elenna.js");
+	}
 }
