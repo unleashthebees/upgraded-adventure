@@ -221,6 +221,18 @@ function refreshDetailsTab() {
 	}
 }
 
+// TODO: validate these:
+	// class (not empty)
+	// race
+	// abilities
+	// increases at levels
+	// feats
+	// traits
+	// skills
+	// 	missing skills
+	// 	class skills
+	// hit dice
+	// other fields (e.g. race=human grants an extra feat and extra skill ranks)
 function showValidatorInfo(parent) {
 	parent.append("stuff is missing!");
 }
