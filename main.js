@@ -8,6 +8,10 @@ function loadCharacter(filename) {
 		exportedKeys = Object.keys(characterSheet);
 		refreshAll();
 	};
+	scriptElem.onerror = function() {
+		// TODO: write this in the GUI
+		console.log("error loading character");
+	};
 	scriptElem.src=filename;
 	document.head.appendChild(scriptElem);
 }
@@ -146,6 +150,7 @@ function refreshCombatStats() {
 	
 	createDisplayElem("1/1/span 1/span 1", "Name", "name", parent);
 	createDisplayElem("1/2/span 1/span 1", "Classes", "classes", parent);
+	createDisplayElem("1/3/span 1/span 1", "Race", "race", parent);
 
 	createDisplayElem("2/1/span 1/span 1", "STR", "totalSTR", parent);
 	createDisplayElem("3/1/span 1/span 1", "DEX", "totalDEX", parent);
@@ -184,9 +189,8 @@ function refreshCombatStats() {
 	}
 }
 
-// TODO: add filters to select between displays (checkboxes)
-// TODO: add display of inventory
-// TODO: add display of innate abilities
+// TODO: add filters to select between displays if there are too many lines (checkboxes)
+// TODO: validators
 function refreshDetailsTab() {
 	let parent = $("#content_details");
 	parent.html("");
@@ -405,6 +409,12 @@ function refreshAll() {
 
 initGUI();
 
+let urlParams = new URLSearchParams(window.location.search);
+let loadChar = urlParams.get("c");
+
+if (loadChar) {
+	loadCharacter(loadChar);
+} else {
 let locallyStored = localStorage.getItem("stats");
 if (locallyStored) {
 	stats = JSON.parse(locallyStored);
@@ -412,4 +422,5 @@ if (locallyStored) {
 	refreshAll();
 } else {
 	loadCharacter("characters/elenna.js");
+}
 }

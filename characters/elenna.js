@@ -1,6 +1,7 @@
 characterSheet = {
 	name: "Elenna",
 	classes: "Cleric 9",
+	race: "Elf",
 	HD: [8, 6, 8, 6, 6, 8, 5, 8, 3],
 	clvl: 9,
 	STR: 13,
@@ -127,6 +128,9 @@ characterSheet = {
 			}
 		},
 		{
+			name: "Birthmark (Trait)"
+		},
+		{
 			name: "Keen Senses (Elven Racial)",
 			bonus: {
 				data: ["perception+2"],
@@ -147,6 +151,22 @@ characterSheet = {
 			}
 		},
 		{
+			name: "Point-Blank Shot",
+			buildinfo: "Level 1 Feat"
+		},
+		{
+			name: "Precise Shot",
+			buildinfo: "Level 3 Feat"
+		},
+		{
+			name: "Rapid Shot",
+			buildinfo: "Level 5 Feat"
+		},
+		{
+			name: "Deadly Aim",
+			buildinfo: "Level 7 Feat"
+		},
+		{
 			name: "Holy Aura",
 			bonus: [
 				{
@@ -158,6 +178,10 @@ characterSheet = {
 					type: "deflection"
 				}
 			]
+		},
+		{
+			name: "Notes",
+			text: "test test"
 		}
 	],
 	spellcasting: [
