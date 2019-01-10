@@ -130,6 +130,7 @@ function calcDerivedValues() {
 		let possibleslots = findSlotForPreparedSpell(prepared);
 		if (possibleslots.length > 0) {
 			possibleslots[0].name = prepared.name;
+			if (prepared.used) possibleslots[0].used = true;
 		} else {
 			// TODO: show this message in GUI
 			console.log("no slot found for "+prepared);
@@ -214,16 +215,44 @@ function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
 
+	// TODO: make prepareMode toggleable and save it in localStorage
+	let prepareMode = false;
+	// TODO: find better symbols
+	let prepareSwitchElem = $(`<div>${prepareMode?
+			"&#x1f4d6;&#xFE0E; Prepare Spells":
+			"&#x1f4d5;&#xFE0E; Use Spells"}</div>`);
+	parent.append(prepareSwitchElem);
+
 	for (let i = 0; i < stats.spellslots.length; ++i) {
 		let slot = stats.spellslots[i];
+		if (prepareMode || slot.name.length > 0) {
 		let slotElem = $(`<div>${slot.level} ${slot.name} ${slot.accept}</div>`);
 		slotElem.addClass("spellslot");
+			if (slot.used) slotElem.addClass("strikethrough");
 		slotElem.click(function() {
 			let modalElem = createModalWindow();
 			let modalTitleElem = $(`<div>Spellslot: ${slot.accept} ${slot.level}</div>`);
 			modalTitleElem.addClass("modal-title");
 			modalElem.append(modalTitleElem);
 
+				if (slot.name.length > 0 && prepareMode) {
+					unprepareElem = $(`<div>Unprepare this spell (${slot.name})</div>`);
+					unprepareElem.click(function() {
+						let filtered = stats.prepared.filter(
+							x => (
+								x.name == slot.name &&
+								x.slot == slot.accept &&
+								x.slotlevel == slot.level));
+						if (filtered.length > 0) {
+							filtered[0].name = "";
+							refreshAll();
+						}
+					});
+					modalElem.append(unprepareElem);
+					modalElem.append("<hr>");
+				}
+				
+				if (prepareMode) {
 			let spells = findSpellsForSpellSlot(slot);
 			for (let spell in spells) {
 				let spellSelectElem =
@@ -231,12 +260,8 @@ function refreshSpellTab() {
 				spellSelectElem.data("slot", slot);
 				spellSelectElem.data("i", i);
 				spellSelectElem.click(function() {
-					console.log(spell);
 					slot.name = spell;
 					refreshAll();
-					console.log(slot);
-					console.log($(this).data("slot"));
-					console.log($(this).data("i"));
 					stats.spellslots[i] = slot;
 
 // FIXME: limit this if it would prepare more spells than spellslots available
@@ -249,8 +274,33 @@ function refreshSpellTab() {
 				});
 				modalElem.append(spellSelectElem);
 			}
+				} else {
+					// TODO: order used spells to the back of the list
+					// TODO: display DC of spell
+					let castElem = $(`<div>${slot.used?"Undo":"Cast this spell"}</div>`);
+					castElem.click(function() {
+						let filtered = stats.prepared.filter(
+							x => (
+								x.name == slot.name &&
+								x.slot == slot.accept &&
+								x.slotlevel == slot.level &&
+								x.used == slot.used));
+						if (filtered.length > 0) {
+							// FIXME: regenerate text of castelem
+							if (filtered[0].used) {
+								delete filtered[0].used;
+							} else {
+								filtered[0].used = true;
+							}
+							console.log(filtered[0]);
+							refreshAll();
+						}
 		});
+					modalElem.append(castElem);
+				}
+			});
 		parent.append(slotElem);
+	}
 	}
 	parent.append("<div/>");
 	// POWERS
