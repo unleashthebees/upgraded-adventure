@@ -79,7 +79,7 @@ characterSheet = {
 			}
 		},
 		{
-			name: "Advancement (Levels 4,8)",
+			name: "Ability Score Increase (Levels 4,8)",
 			bonus: {
 				data: ["DEX+1", "WIS+1"],
 				type: ""
