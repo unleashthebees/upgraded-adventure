@@ -401,6 +401,7 @@ function refreshExportTab() {
 	inputElem.val(exportStr);
 	parent.append(inputElem);
 
+	// TODO: remove url params on import/on refresh
 	let importElem = $("<div>Import</div>");
 	importElem.click(function() {
 		stats = eval(inputElem.val());
