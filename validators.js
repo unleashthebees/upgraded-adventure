@@ -1,7 +1,6 @@
 // TODO: validate these:
 	// base attack bonus
 	// base save bonuses
-	// increases at levels
 	// feats
 	// traits (have to be of different groups)
 	// skills
@@ -30,8 +29,22 @@
 				errorList.push(`Exactly 3 traits are required. (Selected: ${
 					traits.map(x=>x.name).join(", ") || "None"})`);
 			}
-		} finally {
+			let abilityScoreIncrease = stats.innate.filter(
+				x => x.name.match(/Ability Score Increase\s*\([\s\S]*Levels?[\s\S]*\)/g));
+			if (abilityScoreIncrease.length > 0) {
+				errorList.push(`Duplicate: ${
+					abilityScoreIncrease.map(x=>x.name).join(", ")}`);
+			} else if (abilityScoreIncrease.length == 0) {
+				errorList.push("No Ability Score Increases");
+			}
+			let testVal = Math.floor(stats.clvl/4);
+			if (abilityScoreIncrease[0].bonus.data.length != testVal) {
+				errorList.push(
+					`Exactly ${testVal} Ability Score Increases required.
+					Actual: ${abilityScoreIncrease[0].bonus.data}`);
+			}
 
+		} finally {
 			errorList.map(err => (parent.append(`<div>${err}</div>`)));
 			if (errorList.length > 0) parent.append("<hr>");
 		}
