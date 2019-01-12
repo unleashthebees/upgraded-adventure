@@ -14,7 +14,7 @@ characterSheet = {
 	FOR: "SAVE_GOOD(stats.clvl)",
 	REF: "SAVE_POOR(stats.clvl)",
 	WIL: "SAVE_GOOD(stats.clvl)",
-	skillsRanksAvailable: "2*stats.clvl",
+	skillsPerLevel: 2,
 	skillranks: {
 		diplomacy: 1,
 		heal: 1,

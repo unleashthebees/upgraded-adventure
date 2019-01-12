@@ -91,7 +91,8 @@ function calcDerivedValues() {
 	stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
 	stats.skillRanksOpen = sumBonus("SKILLRANKS") +
-		val(stats.skillsRanksAvailable) - sumValues(stats.skillranks);
+		(stats.skillsPerLevel + STAT_MOD(stats.totalINT)) * stats.clvl
+		- sumValues(stats.skillranks);
 
 	stats.totalSpeedLand = 30 + sumBonus("LANDSPEED");
 
