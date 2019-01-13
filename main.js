@@ -143,6 +143,7 @@ function calcDerivedValues() {
 
 // TODO: missing fields: non-land-movement speeds
 // TODO: validators (with display) for used feats, used skill ranks, spell slots, ...
+// TODO: manyshot grants extra arrow on first attack
 function refreshCombatStats() {
 	let parent = $("#content_combat");
 	parent.html("");

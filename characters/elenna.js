@@ -151,20 +151,19 @@ characterSheet = {
 			}
 		},
 		{
-			name: "Point-Blank Shot",
-			buildinfo: "Level 1 Feat"
+			name: "Point-Blank Shot (Feat 1)",
 		},
 		{
-			name: "Precise Shot",
-			buildinfo: "Level 3 Feat"
+			name: "Precise Shot (Feat 3)",
 		},
 		{
-			name: "Rapid Shot",
-			buildinfo: "Level 5 Feat"
+			name: "Rapid Shot (Feat 5)",
 		},
 		{
-			name: "Deadly Aim",
-			buildinfo: "Level 7 Feat"
+			name: "Deadly Aim (Feat 7)",
+		},
+		{
+			name: "Manyshot (Feat 9)"
 		},
 		{
 			name: "Holy Aura",

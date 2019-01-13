@@ -61,7 +61,7 @@
 				errorList.push("No innate property \"Class Skills\"");
 			}
 
-			errorList.push("TEST");
+			if (errorList.length > 0) errorList.push("TEST");
 		} catch {
 			
 		} finally {
