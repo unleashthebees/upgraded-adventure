@@ -96,12 +96,41 @@ function calcDerivedValues() {
 
 	stats.skills = {};
 
-	// TODO: add other skills
-	calculateSkill("stealth", "DEX");
+	calculateSkill("acrobatics", "DEX");
+	calculateSkill("appraise", "INT");
+	calculateSkill("bluff", "CHA");
+	calculateSkill("climb", "STR");
+	calculateSkill("craft", "INT", true);
+	calculateSkill("diplomacy", "CHA");
+	calculateSkill("disable_device", "DEX");
+	calculateSkill("disguise", "CHA");
+	calculateSkill("escape_artist", "DEX");
+	calculateSkill("fly", "DEX");
+	calculateSkill("handle_animal", "CHA");
 	calculateSkill("heal", "WIS");
+	calculateSkill("intimidate", "CHA");
+	calculateSkill("knowledge_arcana", "INT");
+	calculateSkill("knowledge_dungeoneering", "INT");
+	calculateSkill("knowledge_engineering", "INT");
+	calculateSkill("knowledge_geography", "INT");
+	calculateSkill("knowledge_history", "INT");
+	calculateSkill("knowledge_local", "INT");
+	calculateSkill("knowledge_nature", "INT");
+	calculateSkill("knowledge_nobility", "INT");
+	calculateSkill("knowledge_planes", "INT");
 	calculateSkill("knowledge_religion", "INT");
+	calculateSkill("linguistics", "INT");
 	calculateSkill("perception", "WIS");
+	calculateSkill("perform", "CHA", true);
+	calculateSkill("profession", "WIS", true);
+	calculateSkill("ride", "DEX");
+	calculateSkill("sense_motive", "WIS");
+	calculateSkill("sleight_of_hand", "DEX");
 	calculateSkill("spellcraft", "INT");
+	calculateSkill("stealth", "DEX");
+	calculateSkill("survival", "WIS");
+	calculateSkill("swim", "STR");
+	calculateSkill("use_magic_device", "CHA");
 
 	stats.spellslots = [];
 

@@ -31,20 +31,8 @@ function sumBonus(keyword, bonustype) {
 	}
 	return result;
 }
-/*
-function explainBonus(keyword) {
-	for (let i in stats.bonuses) {
-		let bonus = stats.bonuses[i];
-		for (let idata in bonus.data) {
-			let [stat, formula] = splitBonusFormula(bonus.data[idata]);
-			if (keyword == stat) {
-				console.log(formula+"("+bonus.source+")");
-			}
-		}
-	}
-}*/
 
-function calculateSkill(skillname, ability) {
+function calculateSkill(skillname, ability, hasSubSkills) {
 	let ranks = stats.skillranks[skillname];
 	let classSkillbonus = sumBonus("cs_"+skillname);
 
@@ -52,6 +40,12 @@ function calculateSkill(skillname, ability) {
 		stats.skills[skillname] =
 			STAT_MOD(stats["total" + ability]) +
 			(ranks || 0) + classSkillbonus + sumBonus(skillname);
+	}
+
+	if (hasSubSkills) {
+		let subSkills = Object.keys(stats.skillranks)
+			.filter(x => x.match(new RegExp("^" + skillname, "")));
+		subSkills.map(x => calculateSkill(x, ability));
 	}
 }
 
