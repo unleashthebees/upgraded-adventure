@@ -20,13 +20,9 @@ function loadCharacter(filename) {
 		phys. values (height/weight/hair/eyes/...)
 		selected domains
 		selected deity
-		selected feats
-		selected traits
 		replaced class/race feats
 		conditional bonuses
 		senses
-		inventory
-		item slots (overview / slot usage)
 		clvl based values
 	*/
 
@@ -225,9 +221,10 @@ function refreshDetailsTab() {
 }
 
 // TODO: order spells in prep-modal window by highest level, then alphabetically
-// TODO: use a slot (but retain the spell info)
 // TODO: add linebreaks between spellslots
 // TODO: more details on spellslot-elements (and highlight depending on state)
+// TODO: concentration check value when casting
+// TODO: relevant casting ability on spellslot
 // TODO: other daily powers
 function refreshSpellTab() {
 	let parent = $("#content_spells");
@@ -304,7 +301,6 @@ function refreshSpellTab() {
 								x.slotlevel == slot.level &&
 								x.used == slot.used));
 						if (filtered.length > 0) {
-							// FIXME: regenerate text of castelem
 							if (filtered[0].used) {
 								delete filtered[0].used;
 							} else {
