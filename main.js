@@ -96,12 +96,12 @@ function calcDerivedValues() {
 
 	stats.skills = {};
 
-	// TODO: mark if a skill is not trained
 	// TODO: add other skills
 	calculateSkill("stealth", "DEX");
 	calculateSkill("heal", "WIS");
 	calculateSkill("knowledge_religion", "INT");
 	calculateSkill("perception", "WIS");
+	calculateSkill("spellcraft", "INT");
 
 	stats.spellslots = [];
 

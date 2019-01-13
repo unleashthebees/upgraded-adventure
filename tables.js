@@ -65,3 +65,12 @@ function BONUS_SPELLS_PER_DAY(mod, slvl) {
 	if (slvl < 1) return 0;
 	return Math.max(0, Math.ceil((mod - slvl + 1) / 4));
 }
+
+function IS_UNTRAINED_SKILL(skill) {
+	if (skill.match("knowledge")) return false;
+	if (skill.match("profession")) return false;
+	if (skill.match(/^craft/)) return true;
+	if (("disable_device handle_animal linguistics "+
+		"sleight_of_hand spellcraft use_magic_device").match(skill)) return false;
+	return true;
+}

@@ -48,10 +48,10 @@ function calculateSkill(skillname, ability) {
 	let ranks = stats.skillranks[skillname];
 	let classSkillbonus = sumBonus("cs_"+skillname);
 
-	if (ranks > 0) {
+	if (ranks > 0 || IS_UNTRAINED_SKILL(skillname)) {
 		stats.skills[skillname] =
 			STAT_MOD(stats["total" + ability]) +
-			ranks + classSkillbonus + sumBonus(skillname);
+			(ranks || 0) + classSkillbonus + sumBonus(skillname);
 	}
 }
 
@@ -134,6 +134,7 @@ function createSkillsTable() {
 	return tableElem;
 }
 
+// TODO: add other skills
 function skillNameMapping(from) {
 	let to = {
 		stealth: "Stealth",
