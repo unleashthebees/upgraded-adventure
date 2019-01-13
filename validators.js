@@ -53,6 +53,14 @@
 			}
 
 			if (!stats.skillsPerLevel) errorList.push("No skills per level");
+			if (stats.skillRanksOpen) {
+				errorList.push(`${stats.skillRanksOpen} skill ranks (of ${
+					stats.totalSkillRanks}) not invested`);
+			}
+
+			if (!stats.innate.filter(x=>x.name.match("Class Skills")).length>0) {
+				errorList.push("No innate property \"Class Skills\"");
+			}
 
 			errorList.push("TEST"+stats.skillRanksOpen);
 		} finally {

@@ -75,7 +75,7 @@ characterSheet = {
 			name: "Ability Score Racial Traits",
 			bonus: {
 				data: ["CON-2", "INT+2", "DEX+2"],
-				type: ""
+				type: "racial"
 			}
 		},
 		{

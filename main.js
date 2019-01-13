@@ -90,9 +90,11 @@ function calcDerivedValues() {
 
 	stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
-	stats.skillRanksOpen = sumBonus("SKILLRANKS") +
-		(stats.skillsPerLevel + STAT_MOD(stats.totalINT)) * stats.clvl
-		- sumValues(stats.skillranks);
+	// TODO: temporary increases to INT don't increase skill ranks or spell slots
+	stats.totalSkillRanks = sumBonus("SKILLRANKS") +
+		(stats.skillsPerLevel + STAT_MOD(stats.totalINT) +
+			(stats.race.match("Human") ? 1 : 0)) * stats.clvl;
+	stats.skillRanksOpen = stats.totalSkillRanks - sumValues(stats.skillranks);
 
 	stats.totalSpeedLand = 30 + sumBonus("LANDSPEED");
 
