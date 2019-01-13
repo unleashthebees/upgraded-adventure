@@ -2,6 +2,10 @@ function STAT_MOD(x) {
 	return Math.floor((x-10)/2);
 }
 
+function BAB_1_2(clvl) {
+	return Math.floor(clvl/2);
+}
+
 function BAB_3_4(clvl) {
 	return Math.floor(clvl*3/4);
 }
