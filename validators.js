@@ -1,13 +1,8 @@
 // TODO: validate these:
-	// base attack bonus
-	// base save bonuses
 	// traits (have to be of different groups)
-	// skills
-	// 		missing skills
-	// 		class skills
-	//		skills per level (depends on class)
-	// granted fields (e.g. race=human grants an extra feat and extra skill ranks)
+	// granted fields (e.g. cleric grants domains, witch grants hexes)
 	// favored class bonuses
+	// extra languages
 	function showValidatorInfo(parent) {
 		let errorList = [];
 		try {
@@ -19,19 +14,23 @@
 			if (!stats.INT) errorList.push("No INT score");
 			if (!stats.WIS) errorList.push("No WIS score");
 			if (!stats.CHA) errorList.push("No CHA score");
+			if (!stats.BAB) errorList.push("No Base Attack Bonus");
+			if (!stats.FOR) errorList.push("No Fortitude save base value");
+			if (!stats.REF) errorList.push("No Reflex save base value");
+			if (!stats.WIL) errorList.push("No Will save base value");
 			if (!stats.HD) errorList.push("No Hit Dice");
 			if (!stats.clvl) errorList.push("No Total Character Level (clvl)");
 			if (stats.HD.length != stats.clvl) {
 				errorList.push(`|Hit Dice ${stats.HD}| &ne; clvl ${stats.clvl}`);
 			}
-			let traits = stats.innate.filter(x => x.name.match("\\(Trait\\)"));
+			let traits = stats.innate.filter(x => x.name.match(/\(.*Trait.*\)/g));
 			if (traits.length != 3) {
 				errorList.push(`Exactly 3 traits are required. (Selected (${
 					traits.length}): ${traits.map(x => x.name).join(", ") || "None"})`);
 			}
-			/*let abilityScoreIncrease = stats.innate.filter(
+			let abilityScoreIncrease = stats.innate.filter(
 				x => x.name.match(/Ability Score Increase\s*\([\s\S]*Levels?[\s\S]*\)/g));
-			if (abilityScoreIncrease.length > 0) {
+			if (abilityScoreIncrease.length > 1) {
 				errorList.push(`Duplicate: ${
 					abilityScoreIncrease.map(x=>x.name).join(", ")}`);
 			} else if (abilityScoreIncrease.length == 0) {
@@ -41,10 +40,10 @@
 			if (abilityScoreIncrease[0].bonus.data.length != testVal) {
 				errorList.push(
 					`Exactly ${testVal} Ability Score Increases required.
-					Actual: ${abilityScoreIncrease[0].bonus.data}`);
-			}*/
+					Actual: ${abilityScoreIncrease[0].bonus.data.join(", ")}`);
+			}
 
-			let feats = stats.innate.filter(x => x.name.match("\\(Feat\\)"));
+			let feats = stats.innate.filter(x => x.name.match("\\(Feat.*\\)"));
 			let featsAvailable =
 				Math.ceil(stats.clvl / 2) + (stats.race.match("Human") ? 1 : 0);
 			if (feats.length != featsAvailable) {
@@ -62,7 +61,9 @@
 				errorList.push("No innate property \"Class Skills\"");
 			}
 
-			errorList.push("TEST"+stats.skillRanksOpen);
+			errorList.push("TEST");
+		} catch {
+			
 		} finally {
 			errorList.map(err => (parent.append(`<div>${err}</div>`)));
 			if (errorList.length > 0) parent.append("<hr>");
