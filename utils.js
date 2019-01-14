@@ -128,16 +128,10 @@ function createSkillsTable() {
 	return tableElem;
 }
 
-// TODO: add other skills
 function skillNameMapping(from) {
-	let to = {
-		stealth: "Stealth",
-		heal: "Heal",
-		knowledge_religion: "Knowledge (Religion)",
-		perception: "Perception",
-	}[from];
-
-	if (undefined == to) return from;
+	let to = from.replace(/./, x => x.toUpperCase()).replace(/_/g, " ");
+	to = to.replace(/(Knowledge|Craft|Perform|Profession) (.*)/, "$1 ($2)");
+	to = to.replace(/ [^(]/g, x => x.toUpperCase()).replace("Of", "of");
 	return to;
 }
 
