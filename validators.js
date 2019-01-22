@@ -61,7 +61,29 @@
 				errorList.push("No innate property \"Class Skills\"");
 			}
 
-			if (errorList.length > 0) errorList.push("TEST");
+			grants = stats.innate.filter(x => x.grant);
+			unselectedGrants = [];
+			grants.forEach(x => {
+				let gr = x.grant;
+				if (typeof (gr) == "string") {
+					unselectedGrants.push({ name: gr, source: x.name });
+				} else {
+					gr.forEach(y => unselectedGrants.push({ name: y, source: x.name }));
+				}
+			});
+			
+			
+			selected = stats.innate.filter(x => x.name.match(/\(.+\)/));
+			selected.map((x, i, arr) => arr[i] = { name: x.name });
+
+			unselectedGrants.forEach(x => {
+				x.link = selected.find(
+					y => (!y.link &&
+						y.name.match(new RegExp(`\\(.*${x.name}.*\\)`))));
+				if (x.link) x.link.link = x
+				else errorList.push(`Not selected: ${x.name} (Source: ${x.source})`);
+			});
+			
 		} catch {
 			
 		} finally {

@@ -47,6 +47,15 @@ characterSheet = {
 			}
 		},
 		{
+			name: "Witch class feats",
+			grant: ["Hex", "Hex", "Hex", "Hex", "Hex"]
+		},
+		{
+			name: "Extra Hex (Feat Human)",
+			grant: "Hex"
+		},
+		{name: "Cackle (Hex 1)"},
+		{
 			name: "Improved Initiative (Feat 1)",
 			bonus: {
 				data: ["INI+4"],
