@@ -59,7 +59,7 @@ characterSheet = {
 			name: "Mithral Chain Shirt +1",
 			slot: "armor",
 			bonus: {
-				data: ["AC+5", "MAXDEXBONUS+6"],
+				data: ["AC+5", "MAXDEXBONUS=6"],
 				type: "armor"
 			}
 		},
@@ -108,7 +108,7 @@ characterSheet = {
 					"cs_linguistics +3",
 					"cs_profession +3",
 					"cs_sense_motive +3",
-					"cs_spellcraft 3"
+					"cs_spellcraft +3"
 				],
 				type: ""
 			}

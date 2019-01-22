@@ -8,7 +8,7 @@ function val(formula) {
 }
 
 function splitBonusFormula(str) {
-	let pos = str.search(/[+-]/);
+let pos = str.search(/[+-=]/);
 	let stat = str.substr(0, pos).trim();
 	let formula = str.substr(pos).trim();
 	return [stat, formula];

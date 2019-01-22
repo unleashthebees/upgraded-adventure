@@ -76,12 +76,17 @@ function calcDerivedValues() {
 	stats.totalREF = STAT_MOD(stats.totalDEX) + val(stats.REF) + sumBonus("REF");
 	stats.totalWIL = STAT_MOD(stats.totalWIS) + val(stats.WIL) + sumBonus("WIL");
 
-	stats.totalAC = 10 + sumBonus("AC") +
-		Math.min(sumBonus("MAXDEXBONUS"), STAT_MOD(stats.totalDEX));
+	let maxDexBonus = sumBonus("MAXDEXBONUS");
+	if (stats.items.filter(x => x.bonus &&
+		JSON.stringify(x.bonus).match("MAXDEXBONUS")).length == 0) {
+		maxDexBonus = Infinity;
+	}
+	let armorFromDex = Math.min(maxDexBonus, STAT_MOD(stats.totalDEX));
+	stats.totalAC = 10 + sumBonus("AC") + armorFromDex;
+
 	stats.totalTouchAC = stats.totalAC
 		- sumBonus("AC", "armor") - sumBonus("AC", "shield") - sumBonus("AC", "natural");
-	stats.totalFlatFootedAC = stats.totalAC - sumBonus("AC", "dodge") -
-		Math.min(sumBonus("MAXDEXBONUS"), STAT_MOD(stats.totalDEX));
+	stats.totalFlatFootedAC = stats.totalAC - sumBonus("AC", "dodge") - armorFromDex;
 	// TODO: incorporeal touch AC ( = touch AC + armor from force effects)
 
 	stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
