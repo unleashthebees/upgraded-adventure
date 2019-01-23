@@ -47,6 +47,25 @@ characterSheet = {
 			}
 		},
 		{
+			name: "Class Skills (Witch)",
+			bonus: {
+				data: [
+					"cs_craft +3",
+					"cs_fly +3",
+					"cs_heal +3",
+					"cs_intimidate +3",
+					"cs_knowledge_arcana +3",
+					"cs_knowledge_history +3",
+					"cs_knowledge_nature +3",
+					"cs_knowledge_planes +3",
+					"cs_profession +3",
+					"cs_spellcraft +3",
+					"cs_use_magic_device +3"
+				],
+				type: ""
+			}
+		},
+		{
 			name: "Witch class feats",
 			grant: ["Hex", "Hex", "Hex", "Hex", "Hex"]
 		},

@@ -207,8 +207,12 @@ function refreshCombatStats() {
 
 	createDisplayElem("", "BAB", "BAB", parent);
 
+	createDisplayElem("", "Languages", "languages", parent);
+
 	// TODO: add grid-area property to all elements
-	parent.append(createSkillsTable());
+	let skillsTableElem = createSkillsTable()
+	skillsTableElem.attr("style", "grid-area: " + "1/5/span 100/span 1");
+	parent.append(skillsTableElem);
 
 	for (let atk in stats.attacks) {
 		createAttackDisplayElem(atk, parent);

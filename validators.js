@@ -84,6 +84,8 @@
 				else errorList.push(`Not selected: ${x.name} (Source: ${x.source})`);
 			});
 			
+			let languagesAvailable = (stats.skillranks.linguistics || 0)
+				+ STARTING_LANGUAGES(stats.race).length;
 		} catch {
 			
 		} finally {

@@ -74,3 +74,10 @@ function IS_UNTRAINED_SKILL(skill) {
 		"sleight_of_hand spellcraft use_magic_device").match(skill)) return false;
 	return true;
 }
+
+function STARTING_LANGUAGES(race) {
+	return {
+		"Human": ["Common"],
+		"Elf": ["Common", "Elven"]
+	}[race] || [];
+}

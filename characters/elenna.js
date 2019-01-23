@@ -29,6 +29,7 @@ characterSheet = {
 		stealth: 8,
 		survival: 1
 	},
+	languages: ["Common", "Elven"],
 	items: [
 		{
 			name: "Cloak of Elvenkind",

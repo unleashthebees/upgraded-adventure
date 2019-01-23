@@ -51,7 +51,9 @@ function calculateSkill(skillname, ability, hasSubSkills) {
 
 function createDisplayElem(gridArea, displayName, attr, parentElem, unit) {
 	unit = unit || "";
-	let elem = $(`<div>${displayName}: ${val(stats[attr])}${unit}</div>`);
+	let content = val(stats[attr]);
+	if (typeof (content) == "object") content = content.join(", ");
+	let elem = $(`<div>${displayName}: ${content}${unit}</div>`);
 	if (gridArea.length > 0) {
 		elem.attr("style", "grid-area: " + gridArea);
 	}
