@@ -151,7 +151,7 @@ function findSpellsForSpellSlot(slot) {
 	let filtered = allSpellNames.filter(
 		x => (
 			stats.spells[x].level <= slot.level &&
-			stats.spells[x].slot == slot.accept));
+			(stats.spells[x].slot == undefined || stats.spells[x].slot == slot.accept)));
 
 	let result = {}
 	filtered.map(x => result[x] = stats.spells[x]);
