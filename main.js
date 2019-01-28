@@ -159,7 +159,7 @@ function calcDerivedValues() {
 			}
 		}
 	}
-	stats.spellslots.sort((a,b)=>a.level > b.level);
+	stats.spellslots.sort((a, b) => a.level > b.level);
 
 	// prepare spells
 	for (let i in stats.prepared) {
@@ -227,7 +227,6 @@ function refreshCombatStats() {
 }
 
 // TODO: add filters to select between displays if there are too many lines (checkboxes)
-// TODO: validators
 function refreshDetailsTab() {
 	let parent = $("#content_details");
 	parent.html("");
@@ -318,6 +317,10 @@ function refreshSpellTab() {
 							stats.spellslots[i] = slot;
 
 							// FIXME: limit this if it would prepare more spells than spellslots available
+							if (!stats.prepared) {
+								stats.prepared = [];
+								exportedKeys.push("prepared");
+							}
 							stats.prepared.push({
 								name: spell,
 								slot: slot.accept,
@@ -328,9 +331,7 @@ function refreshSpellTab() {
 						modalElem.append(spellSelectElem);
 					}
 				} else {
-					// TODO: order used spells to the back of the list
-					// TODO: display DC of spell
-					let castElem = $(`<div>${slot.used?"Undo":"Cast this spell"}</div>`);
+					let castElem = $(`<div>${slot.used ? "Undo" : "Cast this spell"}</div>`);
 					castElem.click(function() {
 						let filtered = stats.prepared.filter(
 							x => (

@@ -16,8 +16,14 @@ characterSheet = {
 	WIL: "SAVE_GOOD(stats.clvl)",
 	skillsPerLevel: 2,
 	skillranks: {
+		bluff: 8,
 		craft_clothing: 1,
+		diplomacy: 8,
+		disable_device: 8,
 		disguise: 1,
+		escape_artist: 8,
+		fly: 1,
+		heal: 1,
 		knowledge_arcana: 8,
 		knowledge_dungeoneering: 1,
 		knowledge_engineering: 1,
@@ -28,9 +34,28 @@ characterSheet = {
 		knowledge_nobility: 1,
 		knowledge_planes: 1,
 		knowledge_religion: 1,
-		spellcraft: 8
+		perception: 8,
+		spellcraft: 8,
+		use_magic_device: 1
 	},
-	items: [],
+	items: [
+		{
+			name: "Circlet of Persuasion",
+			slot: "head",
+			bonus: {
+				data: ["CHA_CHECKS+3"],
+				type: "competence"
+			}
+		},
+		{
+			name: "Vest of Escape",
+			slot: "chest",
+			bonus: {
+				data: ["disable_device +4", "escape_artist +6"],
+				type: "competence"
+			}
+		}
+	],
 	innate: [
 		{
 			name: "Ability Score Racial Traits",
@@ -73,7 +98,6 @@ characterSheet = {
 			name: "Extra Hex (Feat Human)",
 			grant: "Hex"
 		},
-		{name: "Cackle (Hex 1)"},
 		{
 			name: "Improved Initiative (Feat 1)",
 			bonus: {
@@ -81,7 +105,9 @@ characterSheet = {
 				type: ""
 			}
 		},
-		{name: "Improved Familiar (Feat 7)"},
+		{ name: "Spell Penetration (Feat 3)" },
+		{ name: "Spell Focus Conjuration???? (Feat 5)" },
+		{ name: "Improved Familiar (Feat 7)" },
 		{
 			name: "Vagabond Child (Regional Trait)",
 			bonus: {
@@ -89,6 +115,12 @@ characterSheet = {
 				type: "trait"
 			}
 		},
+		{name: "Disguise (Hex 1)"},
+		{name: "Misfortune (Hex 2)"},
+		{name: "Evil Eye (Hex 4)"},
+		{name: "Cackle (Hex 6)"},
+		{name: "Fortune (Hex 8)"},
+		{name: "Charm (Extra Hex)"},
 		{
 			name: "World Traveler (Human Race Trait)",
 			bonus: {
@@ -104,6 +136,28 @@ characterSheet = {
 			}
 		}
 	],
+	spells: {
+		"Dancing Lights": {level: 0},
+		"Detect Magic": {level: 0},
+		"Detect Poison": {level: 0},
+		"Guidance": {level: 0},
+		"Light": {level: 0},
+		"Mending": {level: 0},
+		"Message": {level: 0},
+		"Read Magic": {level: 0},
+		"Spark": {level: 0},
+		"Stabilize": {level: 0},
+		"Ray of Enfeeblement": {level: 1},
+		"Mage Armor": {level:1},
+		"Command": {level:1},
+		"Blindness/Deafness": {level:2},
+		"False Life": {level:2},
+		"Pox Postules": {level:2},
+		"Bestow Curse": {level:3},
+		"Fly": {level:3},
+		"Remove Blindness/Deafness": {level:3},
+		"Wandering Star Motes": {level:4},
+	},
 	temporary: [],
 	attacks: {
 		ranged_touch: {dice: "", source: "", type: "ranged touch"}

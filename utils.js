@@ -14,8 +14,7 @@ let pos = str.search(/[+-=]/);
 	return [stat, formula];
 }
 
-// todo: add explanation of bonuses to gui
-function sumBonus(keyword, bonustype) {
+// TODO: add explanation of bonuses to gui
 	let result = 0;
 	for (let i in stats.bonuses) {
 		let bonus = stats.bonuses[i];
