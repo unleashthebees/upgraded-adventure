@@ -33,20 +33,21 @@ function sumBonus(keyword, bonustype, sourceData) {
 	return result;
 }
 
-function calculateSkill(skillname, ability, hasSubSkills) {
+function calculateSkill(skillname, ability, hasSubSkills, applyClassSkillBonus) {
 	let ranks = stats.skillranks[skillname];
-	let classSkillbonus = sumBonus("cs_"+skillname);
+	let classSkillbonus = applyClassSkillBonus ? 3 : sumBonus("cs_" + skillname);
 
 	if (ranks > 0 || IS_UNTRAINED_SKILL(skillname)) {
 		stats.skills[skillname] =
-			STAT_MOD(stats["total" + ability]) +
-			(ranks || 0) + classSkillbonus + sumBonus(skillname);
+			STAT_MOD(stats["total" + ability])
+			+ (ranks || 0) + (ranks > 0 ? classSkillbonus : 0) + sumBonus(skillname)
+			+ sumBonus(ability + "_CHECKS");
 	}
 
 	if (hasSubSkills) {
 		let subSkills = Object.keys(stats.skillranks)
 			.filter(x => x.match(new RegExp("^" + skillname, "")));
-		subSkills.map(x => calculateSkill(x, ability));
+		subSkills.map(x => calculateSkill(x, ability, false, classSkillbonus > 0));
 	}
 }
 
