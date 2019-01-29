@@ -299,6 +299,7 @@ function refreshSpellTab() {
 								x.slotlevel == slot.level));
 						if (filtered.length > 0) {
 							filtered[0].name = "";
+							stats.prepared = stats.prepared.filter(x => x.name);
 							refreshAll();
 						}
 					});
