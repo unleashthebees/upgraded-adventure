@@ -9,14 +9,14 @@ function loadCharacter(filename) {
 		refreshAll();
 	};
 	scriptElem.onerror = function() {
-		// TODO: write this in the GUI
+		// TODO: (10) write this in the GUI
 		console.log("error loading character");
 	};
 	scriptElem.src=filename;
 	document.head.appendChild(scriptElem);
 }
 
-/* TODO: missing input:
+/* TODO: (6) missing input:
 		phys. values (height/weight/hair/eyes/...)
 		selected domains
 		selected deity
@@ -51,11 +51,11 @@ function calcDerivedValues() {
 		}
 	}
 
-	// TODO: validate if any temporary bonus has an invalid source
+	// TODO: (9) validate if any temporary bonus has an invalid source
 	stats.bonuses = stats.bonuses.concat(
 		stats.temporary.filter(x => x.state == "on"));
 	
-	// TODO: explain calculations e.g. with this:
+	// TODO: (10) explain calculations e.g. with this:
 	//	stats.totalSTR = (()=>stats.STR + sumBonus("STR"))();
 	//	explainSTR = `base ${stats.STR} + ?? (bonuses)`;
 	stats.totalSTR = stats.STR + sumBonus("STR");
@@ -65,7 +65,7 @@ function calcDerivedValues() {
 	stats.totalWIS = stats.WIS + sumBonus("WIS");
 	stats.totalCHA = stats.CHA + sumBonus("CHA");
 
-	// TODO: size mods
+	// TODO: (10) size mods
 	stats.totalCMB = val(stats.BAB) + STAT_MOD(stats.totalSTR) + sumBonus("CMB");
 	stats.totalCMD = 10 + val(stats.BAB) + STAT_MOD(stats.totalSTR) +
 		STAT_MOD(stats.totalDEX) + sumBonus("CMD");
@@ -87,11 +87,11 @@ function calcDerivedValues() {
 	stats.totalTouchAC = stats.totalAC
 		- sumBonus("AC", "armor") - sumBonus("AC", "shield") - sumBonus("AC", "natural");
 	stats.totalFlatFootedAC = stats.totalAC - sumBonus("AC", "dodge") - armorFromDex;
-	// TODO: incorporeal touch AC ( = touch AC + armor from force effects)
+	// TODO: (10) incorporeal touch AC ( = touch AC + armor from force effects)
 
 	stats.hitpoints = SUM_HD(stats.HD,stats.totalCON);
 
-	// TODO: temporary increases to INT don't increase skill ranks or spell slots
+	// TODO: (9) temporary increases to INT don't increase skill ranks or spell slots
 	stats.totalSkillRanks = sumBonus("SKILLRANKS") +
 		(stats.skillsPerLevel + STAT_MOD(stats.totalINT) +
 			(stats.race.match("Human") ? 1 : 0)) * stats.clvl;
@@ -101,6 +101,7 @@ function calcDerivedValues() {
 
 	stats.skills = {};
 
+	// TODO: (8) same bonuses don't stack
 	calculateSkill("acrobatics", "DEX");
 	calculateSkill("appraise", "INT");
 	calculateSkill("bluff", "CHA");
@@ -169,14 +170,15 @@ function calcDerivedValues() {
 			possibleslots[0].name = prepared.name;
 			if (prepared.used) possibleslots[0].used = true;
 		} else {
-			// TODO: show this message in GUI
+			// TODO: (10) show this message in GUI
 			console.log("no slot found for "+prepared);
 		}
 	}
 }
 
-// TODO: missing fields: non-land-movement speeds
-// TODO: manyshot grants extra arrow on first attack
+// TODO: (9) missing fields: non-land-movement speeds
+// TODO: (9) manyshot grants extra arrow on first attack
+// TODO: (3) display load and encumberance
 function refreshCombatStats() {
 	let parent = $("#content_combat");
 	parent.html("");
@@ -258,18 +260,17 @@ function refreshDetailsTab() {
 }
 
 // TODO: order spells in prep-modal window by highest level, then alphabetically
-// TODO: add linebreaks between spellslots
+// TODO: (4) add linebreaks between spellslots
 // TODO: more details on spellslot-elements (and highlight depending on state)
-// TODO: concentration check value when casting
-// TODO: relevant casting ability on spellslot
+// TODO: (1) relevant casting ability on spellslot
 // TODO: other daily powers
 function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
 
-	// TODO: make prepareMode toggleable and save it in localStorage
-	let prepareMode = false;
-	// TODO: find better symbols
+	// TODO: (1) make prepareMode toggleable and save it in localStorage
+	let prepareMode = true;
+	// TODO: (10) find better symbols
 	let prepareSwitchElem = $(`<div>${prepareMode?
 			"&#x1f4d6;&#xFE0E; Prepare Spells":
 			"&#x1f4d5;&#xFE0E; Use Spells"}</div>`);
@@ -331,6 +332,8 @@ function refreshSpellTab() {
 						modalElem.append(spellSelectElem);
 					}
 				} else {
+					// TODO: (7) order used spells to the back of the list
+					// TODO: (2) display DC of spell, and conc check needed for casting def
 					let castElem = $(`<div>${slot.used ? "Undo" : "Cast this spell"}</div>`);
 					castElem.click(function() {
 						let filtered = stats.prepared.filter(
@@ -361,7 +364,7 @@ function refreshSpellTab() {
 	for (let key in powerSources) {
 		let source = powerSources[key];
 		if (source.power) {
-			// TODO: make powers usable (=reduce count by 1)
+			// TODO: (3) make powers usable (=reduce count by 1)
 			let usesStr = source.power.uses_per_day?`${val(source.power.uses_per_day)}x `:"";
 			let powerElem = $(`<div>${usesStr}${source.name}</div>`);
 			powerElem.addClass("spellslot");

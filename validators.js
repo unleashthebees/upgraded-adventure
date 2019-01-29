@@ -1,8 +1,7 @@
-// TODO: validate these:
-	// traits (have to be of different groups)
-	// granted fields (e.g. cleric grants domains, witch grants hexes)
-	// favored class bonuses
-	// extra languages
+// TODO: (10) validate traits (have to be of different groups)
+// TODO: (4) validate extra languages
+// TODO: (8) validate items don't share the same slot
+// TODO: (2) spells known against spells learned per level / spells learned from spellcraft
 	function showValidatorInfo(parent) {
 		let errorList = [];
 		try {
