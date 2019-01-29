@@ -35,12 +35,16 @@
 			} else if (abilityScoreIncrease.length == 0) {
 				errorList.push("No Ability Score Increases");
 			}
-			let testVal = Math.floor(stats.clvl/4);
-			if (abilityScoreIncrease[0].bonus.data.length != testVal) {
+		let requiredCount = Math.floor(stats.clvl/4);
+		if (abilityScoreIncrease[0].bonus.data.length != requiredCount) {
 				errorList.push(
-					`Exactly ${testVal} Ability Score Increases required.
+				`Exactly ${requiredCount} Ability Score Increases required.
 					Actual: ${abilityScoreIncrease[0].bonus.data.join(", ")}`);
 			}
+
+		if (stats.innate.filter(x => x.name.match(/Favored Class Bonus/)).length < 1) { 
+			errorList.push("No Favored Class Bonuses");
+		}
 
 			let feats = stats.innate.filter(x => x.name.match("\\(Feat.*\\)"));
 			let featsAvailable =
