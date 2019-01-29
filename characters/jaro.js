@@ -136,6 +136,15 @@ characterSheet = {
 			}
 		}
 	],
+	spellcasting: [
+		{
+			slots: "SPELLS_PER_DAY_PREPARED_FULLCASTER",
+			ability: "INT",
+			accept: "arcane",
+			bonusSpells: true,
+			spellsLearned: "SPELLS_LEARNED_WITCH"
+		}
+	],
 	spells: {
 		"Dancing Lights": {level: 0},
 		"Detect Magic": {level: 0},

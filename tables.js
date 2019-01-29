@@ -81,3 +81,20 @@ function STARTING_LANGUAGES(race) {
 		"Elf": ["Common", "Elven"]
 	}[race] || [];
 }
+
+function SPELLS_LEARNED_WITCH(clvl) {
+	let intl = stats.INT;
+	intl += sumBonus("INT", "", stats.bonuses.filter(
+		x => x.source.match("Ability Score Racial Traits")));
+
+	let result = [STAT_MOD(intl) + 3]
+
+	for (let i = 2; i <= clvl; ++i) {
+		let slvl = Math.ceil(i / 2);
+		result[slvl-1] = (result[slvl-1] || 0) + 2;
+	}
+
+	// TODO: (1) extra spells known from favored class
+	// TODO: (1) extra spells known from spellcraft
+	return result;
+}

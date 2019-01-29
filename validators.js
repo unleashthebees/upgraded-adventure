@@ -85,6 +85,26 @@
 			
 			let languagesAvailable = (stats.skillranks.linguistics || 0)
 				+ STARTING_LANGUAGES(stats.race).length;
+		if (stats.spellcasting) {
+			let spellsLearned = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(
+				y => Object.entries(stats.spells).filter(x => x[1].level == y).length);
+			// TODO: (10) this might not work for multiple spellcasting sources
+			let spellsLearnedGoal = stats.spellcasting
+				.filter(x => x.spellsLearned)
+				.map(x => val(`${x.spellsLearned} (${stats.clvl})`));
+			spellsLearnedGoal.forEach(goal => {
+				let remaining = goal.map((x, i) => x - spellsLearned[i]);
+				remaining.forEach((x,i)=>{
+					if (x > 0) {
+						errorList.push(
+							`Not enough (${x}/${goal[i]}) Level ${i+1} Spells selected.`);
+					} else if (x < 0) {
+						errorList.push(
+							`Too many (${goal[i]-x}/${goal[i]}) Level ${i+1} Spells selected.`);
+					}
+				});
+			});
+		}
 		} catch {
 			
 		} finally {

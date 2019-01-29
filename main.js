@@ -29,7 +29,7 @@ function loadCharacter(filename) {
 function calcDerivedValues() {
 	// use items and other sources for bonuses
 	stats.bonuses = [];
-	let sources = stats.items.concat(stats.innate);	
+	let sources = stats.items.concat(stats.innate);
 	for (let i in sources) {
 		let source = sources[i];
 		if (source.bonus) {

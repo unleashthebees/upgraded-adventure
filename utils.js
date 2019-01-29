@@ -15,9 +15,11 @@ let pos = str.search(/[+-=]/);
 }
 
 // TODO: add explanation of bonuses to gui
+function sumBonus(keyword, bonustype, sourceData) {
+	let source = sourceData ? sourceData : stats.bonuses;
 	let result = 0;
-	for (let i in stats.bonuses) {
-		let bonus = stats.bonuses[i];
+	for (let i in source) {
+		let bonus = source[i];
 		if (!bonustype || bonustype == bonus.type) {
 			for (let idata in bonus.data) {
 				let [stat, formula] = splitBonusFormula(bonus.data[idata]);
