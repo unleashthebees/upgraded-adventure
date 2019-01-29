@@ -154,7 +154,8 @@ function calcDerivedValues() {
 				let slot = {
 					name: "",
 					level: slvl,
-					accept: source.accept
+					accept: source.accept,
+					ability: source.ability
 				}
 				stats.spellslots.push(slot);
 			}
