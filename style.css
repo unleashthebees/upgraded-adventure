@@ -16,6 +16,9 @@ table {
 textarea {
 	width: 90%;
 	height: 87%;
+	-moz-tab-size: 4; /* Firefox */
+	-o-tab-size: 4; /* Opera */
+	tab-size: 4;
 }
 
 #content_combat {
