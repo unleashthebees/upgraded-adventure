@@ -150,12 +150,14 @@ function calcDerivedValues() {
 			let casterStatMod = STAT_MOD(val("stats.total" + source.ability));
 			let bonusSpells = (source.bonusSpells) ?
 				BONUS_SPELLS_PER_DAY(casterStatMod, slvl) : 0;
-			for (let i = 0; i < spellsPerDay[slvl] + bonusSpells; ++i) {
+			let spellsAvailable = spellsPerDay[slvl] + bonusSpells
+			for (let i = 0; i < spellsAvailable; ++i) {
 				let slot = {
 					name: "",
 					level: slvl,
 					accept: source.accept,
-					ability: source.ability
+					ability: source.ability,
+					limit: spellsAvailable
 				}
 				stats.spellslots.push(slot);
 			}
@@ -263,7 +265,6 @@ function refreshDetailsTab() {
 // TODO: order spells in prep-modal window by highest level, then alphabetically
 // TODO: (4) add linebreaks between spellslots
 // TODO: more details on spellslot-elements (and highlight depending on state)
-// TODO: (1) relevant casting ability on spellslot
 // TODO: other daily powers
 function refreshSpellTab() {
 	let parent = $("#content_spells");
@@ -301,12 +302,15 @@ function refreshSpellTab() {
 							filtered[0].name = "";
 							stats.prepared = stats.prepared.filter(x => x.name);
 							refreshAll();
+							$(".modal").remove();
 						}
 					});
 					modalElem.append(unprepareElem);
 					modalElem.append("<hr>");
 				}
 				
+				// TODO: (6) refresh modal window contents and show currently prepared
+				// spells for that level
 				if (prepareMode) {
 					let spells = findSpellsForSpellSlot(slot);
 					for (let spell in spells) {
@@ -319,17 +323,25 @@ function refreshSpellTab() {
 							refreshAll();
 							stats.spellslots[i] = slot;
 
-							// FIXME: limit this if it would prepare more spells than spellslots available
 							if (!stats.prepared) {
 								stats.prepared = [];
 								exportedKeys.push("prepared");
 							}
-							stats.prepared.push({
-								name: spell,
-								slot: slot.accept,
-								slotlevel: slot.level
-							});
-							refreshAll();
+							let slotsLeft = slot.limit - stats.prepared.filter(x =>
+								x.slot == slot.accept && x.slotlevel == slot.level).length;
+							console.log(slot.limit);
+							console.log(slotsLeft);
+							if (slotsLeft > 0) {
+								stats.prepared.push({
+									name: spell,
+									slot: slot.accept,
+									slotlevel: slot.level
+								});
+								refreshAll();
+							}
+							if (slotsLeft < 2) {
+								$(".modal").remove();
+							}
 						});
 						modalElem.append(spellSelectElem);
 					}
@@ -420,8 +432,8 @@ function refreshExportTab() {
 
 	let exportStr = exportPrefix + JSON.stringify(exportData, undefined, "\t");
 
-	// replace quotes
-	exportStr = exportStr.replace(/\"([^\s"]+)\":/g,"$1:");
+	// replace quotes in keys
+	exportStr = exportStr.replace(/\"([^\s/"]+)\":/g,"$1:");
 
 	// remove some whitespace in arrays if they are short enough (for [] brackets)
 	exportStr = exportStr.replace(/\[[^\[\]]{1,80}\]/g,
@@ -451,6 +463,12 @@ function refreshExportTab() {
 		refreshAll();
 	});
 	parent.append(importElem);
+
+	let loadElem = $("<div>Load</div>");
+	loadElem.click(function() {
+		window.location.search = "?c=characters/jaro.js";
+	});
+	parent.append(loadElem);
 }
 
 function refreshAll() {
