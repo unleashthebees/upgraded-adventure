@@ -464,9 +464,13 @@ function refreshExportTab() {
 	});
 	parent.append(importElem);
 
+	let loadNameElem = $("<input></input>");
+	loadNameElem.attr("id", "loadName");
+	parent.append(loadNameElem);
 	let loadElem = $("<div>Load</div>");
 	loadElem.click(function() {
-		window.location.search = "?c=characters/jaro.js";
+		let n = $("#loadName")[0].value;
+		window.location.search = `?c=characters/${n}.js`;
 	});
 	parent.append(loadElem);
 }
