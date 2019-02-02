@@ -124,9 +124,7 @@ characterSheet = {
 			},
 			info: "one level below max spell level"
 		},
-		{
-			name: "Alertness"
-		},
+		
 		{
 			name: "Class Skills (Witch)",
 			bonus: {
