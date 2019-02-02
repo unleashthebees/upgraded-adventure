@@ -84,6 +84,10 @@ characterSheet = {
 				type: "deflection"
 			}
 		},
+		{ name: "Amulet of Natural Armor",
+			slot: "neck",
+			bonus:{ data: ["AC+1"], type: "natural" }
+		},
 		{
 			name: "Metamagic Rod of Extend (Lesser)",
 			power: {uses_per_day: 3}
