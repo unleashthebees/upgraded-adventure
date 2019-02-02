@@ -101,7 +101,7 @@
 				remaining.forEach((x,i)=>{
 					if (x > 0) {
 						errorList.push(
-							`Not enough (${x}/${goal[i]}) Level ${i+1} Spells selected.`);
+							`Not enough (${x} missing/${goal[i]}) Level ${i+1} Spells selected.`);
 					} else if (x < 0) {
 						errorList.push(
 							`Too many (${goal[i]-x}/${goal[i]}) Level ${i+1} Spells selected.`);

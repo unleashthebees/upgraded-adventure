@@ -20,7 +20,7 @@ characterSheet = {
 		craft_clothing: 1,
 		diplomacy: 8,
 		disable_device: 8,
-		disguise: 1,
+		disguise: 8,
 		escape_artist: 8,
 		fly: 1,
 		heal: 1,
@@ -29,7 +29,7 @@ characterSheet = {
 		knowledge_engineering: 1,
 		knowledge_geography: 1,
 		knowledge_history: 1,
-		knowledge_local: 1,
+		knowledge_local: 8,
 		knowledge_nature: 1,
 		knowledge_nobility: 1,
 		knowledge_planes: 1,
@@ -45,7 +45,8 @@ characterSheet = {
 			bonus: {
 				data: ["CHA_CHECKS+3"],
 				type: "competence"
-			}
+		},
+			price: 4500
 		},
 		{
 			name: "Vest of Escape",
@@ -53,8 +54,44 @@ characterSheet = {
 			bonus: {
 				data: ["disable_device +4", "escape_artist +6"],
 				type: "competence"
+			},
+			price: 5200
+		},
+		{
+			name: "Headband of Vast Intelligence",
+			slot: "headband",
+			bonus: {
+				data: ["INT+2"],
+				type: "enhancement"
+			},
+			ranks: "escape_artist",
+			price: 4000
+		},
+		{
+			name: "Cloak of Resistance",
+			slot: "shoulders",
+			bonus: {
+				data: ["FOR+2", "REF+2", "WIL+2"],
+				type: "resistance"
+			},
+			price: 1000
+		},
+		{
+			name: "Ring of Protection",
+			slot: "ring",
+			bonus: {
+				data: ["AC+1"],
+				type: "deflection"
 			}
-		}
+		},
+		{
+			name: "Metamagic Rod of Extend (Lesser)",
+			power: {uses_per_day: 3}
+		},
+		{name: "Handy Haversack", price: 2000},
+		{name: "Scroll(1) of Comprehend Languages", price: 25},
+		{name: "Scroll(1) of Mount", price: 25},
+		{name: "Scroll(2) of Web", price: 150}
 	],
 	innate: [
 		{
@@ -94,10 +131,7 @@ characterSheet = {
 			name: "Witch class feats",
 			grant: ["Hex", "Hex", "Hex", "Hex", "Hex"]
 		},
-		{
-			name: "Extra Hex (Feat Human)",
-			grant: "Hex"
-		},
+		{name: "Extra Hex (Feat Human)", grant: "Hex"},
 		{
 			name: "Improved Initiative (Feat 1)",
 			bonus: {
@@ -105,9 +139,18 @@ characterSheet = {
 				type: ""
 			}
 		},
-		{ name: "Spell Penetration (Feat 3)" },
-		{ name: "Spell Focus Conjuration???? (Feat 5)" },
-		{ name: "Improved Familiar (Feat 7)" },
+		{
+			name: "Spell Penetration (Feat 3)",
+			info: "+2 on caster level checks vs SR"
+		},
+		{
+			name: "Skill Focus (Feat 5)",
+			bonus: {
+				data: ["bluff +(stats.skillranks.bluff<10?3:6)"],
+				type: ""
+			}
+		},
+		{name: "Improved Familiar (Feat 7)"},
 		{
 			name: "Vagabond Child (Regional Trait)",
 			bonus: {
@@ -146,26 +189,46 @@ characterSheet = {
 		}
 	],
 	spells: {
+		"Silent Image": {level: 1, source: "Witch Patron (Shadow)"},
+		Darkness: {level: 2, source: "Witch Patron (Shadow)"},
+		"Deeper Darkness": {level: 3, source: "Witch Patron (Shadow)"},
+		"Shadow Conjuration": {level: 4, source: "Witch Patron (Shadow)"},
 		"Dancing Lights": {level: 0},
 		"Detect Magic": {level: 0},
 		"Detect Poison": {level: 0},
-		"Guidance": {level: 0},
-		"Light": {level: 0},
-		"Mending": {level: 0},
-		"Message": {level: 0},
+		Guidance: {level: 0},
+		Light: {level: 0},
+		Mending: {level: 0},
+		Message: {level: 0},
 		"Read Magic": {level: 0},
-		"Spark": {level: 0},
-		"Stabilize": {level: 0},
+		Spark: {level: 0},
+		Stabilize: {level: 0},
+		"Beguiling Gift": {level: 1},
+		"Charm Person": {level: 1},
+		Command: {level: 1},
+		"Cure Light Wounds": {level: 1},
+		"Detect Secret Doors": {level: 1},
+		"Mage Armor": {level: 1},
+		"Mask Dweomer": {level: 1},
+		"Obscuring Mist": {level: 1},
 		"Ray of Enfeeblement": {level: 1},
-		"Mage Armor": {level:1},
-		"Command": {level:1},
-		"Blindness/Deafness": {level:2},
-		"False Life": {level:2},
-		"Pox Postules": {level:2},
-		"Bestow Curse": {level:3},
-		"Fly": {level:3},
-		"Remove Blindness/Deafness": {level:3},
-		"Wandering Star Motes": {level:4},
+		"Unseen Servant": {level: 1},
+		"Alter Self": {level: 2},
+		"Detect Thoughts": {level: 2},
+		"False Life": {level: 2},
+		Glitterdust: {level: 2},
+		"Pox Postules": {level: 2},
+		"Vomit Swarm": {level: 2},
+		"Dispel Magic": {level: 3},
+		Fly: {level: 3},
+		"Lightning Bolt": {level: 3},
+		"Pain Strike": {level: 3},
+		"Stinking Cloud": {level: 3},
+		Tongues: {level: 3},
+		"Black Tentacles": {level: 4},
+		Enervation: {level: 4},
+		Scrying: {level: 4},
+		"Solid Fog": {level: 4}
 	},
 	temporary: [],
 	attacks: {

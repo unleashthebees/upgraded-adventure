@@ -253,6 +253,11 @@ function refreshDetailsTab() {
 		var flag = true;
 	}
 
+	let playerWealth = stats.items.filter(x => x.price)
+		.reduce((sum, item) => sum + item.price, 0);
+
+	parent.append(`Wealth in items: ${playerWealth} gp`);
+
 	if (flag) parent.append("<hr>");
 
 	for (let i in stats.innate) {
