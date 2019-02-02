@@ -84,9 +84,13 @@ characterSheet = {
 				type: "deflection"
 			}
 		},
-		{ name: "Amulet of Natural Armor",
+		{
+			name: "Amulet of Natural Armor",
 			slot: "neck",
-			bonus:{ data: ["AC+1"], type: "natural" }
+			bonus: {
+				data: ["AC+1"],
+				type: "natural"
+			}
 		},
 		{
 			name: "Metamagic Rod of Extend (Lesser)",
@@ -124,7 +128,6 @@ characterSheet = {
 			},
 			info: "one level below max spell level"
 		},
-		
 		{
 			name: "Class Skills (Witch)",
 			bonus: {
