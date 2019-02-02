@@ -45,7 +45,7 @@ characterSheet = {
 			bonus: {
 				data: ["CHA_CHECKS+3"],
 				type: "competence"
-		},
+			},
 			price: 4500
 		},
 		{
