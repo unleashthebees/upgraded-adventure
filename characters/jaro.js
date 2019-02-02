@@ -109,6 +109,18 @@ characterSheet = {
 			}
 		},
 		{
+			name: "Favored Class Bonus (Levels 1-8)",
+			bonus: {
+				data: [
+					"SKILLRANKS+4",
+					"SPELLSKNOWN_WITCH_2+2",
+					"SPELLSKNOWN_WITCH_3+2"
+				],
+				type: ""
+			},
+			info: "one level below max spell level"
+		},
+		{
 			name: "Class Skills (Witch)",
 			bonus: {
 				data: [

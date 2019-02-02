@@ -94,7 +94,8 @@ function SPELLS_LEARNED_WITCH(clvl) {
 		result[slvl-1] = (result[slvl-1] || 0) + 2;
 	}
 
-	// TODO: (1) extra spells known from favored class
-	// TODO: (1) extra spells known from spellcraft
+	for (let i = 0; i < result.length; ++i) {
+		result[i] += sumBonus("SPELLSKNOWN_WITCH_" + (i + 1));
+	}
 	return result;
 }

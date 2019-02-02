@@ -91,7 +91,8 @@
 				+ STARTING_LANGUAGES(stats.race).length;
 		if (stats.spellcasting) {
 			let spellsLearned = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(
-				y => Object.entries(stats.spells).filter(x => x[1].level == y).length);
+				y => Object.entries(stats.spells).filter(
+					x => x[1].level == y && !x[1].source).length);
 			// TODO: (10) this might not work for multiple spellcasting sources
 			let spellsLearnedGoal = stats.spellcasting
 				.filter(x => x.spellsLearned)
