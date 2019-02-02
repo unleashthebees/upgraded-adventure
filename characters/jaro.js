@@ -2,7 +2,7 @@ characterSheet = {
 	name: "Jaro Imaradi",
 	race: "Human",
 	classes: "Witch 8",
-	HD: [6, 1, 1, 1, 1, 1, 1, 1],
+	HD: [6, 6, 5, 4, 6, 5, 1, 5],
 	clvl: 8,
 	STR: 8,
 	DEX: 14,
