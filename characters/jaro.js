@@ -88,7 +88,7 @@ characterSheet = {
 			name: "Amulet of Natural Armor",
 			slot: "neck",
 			bonus: {
-				data: ["AC+1"],
+				data: ["AC+91"],
 				type: "natural"
 			}
 		},
@@ -145,6 +145,12 @@ characterSheet = {
 					"cs_use_magic_device +3"
 				],
 				type: ""
+			}
+		},
+		{
+			name: "Alertness",
+			bonus: {
+				data: ["perception+2", "sense_motive+2"]
 			}
 		},
 		{
