@@ -125,6 +125,10 @@ characterSheet = {
 			info: "one level below max spell level"
 		},
 		{
+			name: "Alertness",
+			bonus: { data: ["perception+2", "sense_motive+2"], type: ""], info: "+4 when 10 ranks"
+			       },
+		{
 			name: "Class Skills (Witch)",
 			bonus: {
 				data: [
