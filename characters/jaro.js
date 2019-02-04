@@ -88,13 +88,27 @@ characterSheet = {
 			name: "Amulet of Natural Armor",
 			slot: "neck",
 			bonus: {
-				data: ["AC+91"],
+				data: ["AC+1"],
 				type: "natural"
-			}
+		},
+			price: 2000
 		},
 		{
 			name: "Metamagic Rod of Extend (Lesser)",
-			power: {uses_per_day: 3}
+			power: {uses_per_day: 3},
+			price: 3000
+		},
+		{
+			name: "Spell Component Pouch",
+			price: 5
+		},
+		{
+			name: "Outfit, Traveler's"
+		},
+		{
+			name: "Silver Mirror",
+			price: 1100,
+			info: "plus box"
 		},
 		{name: "Handy Haversack", price: 2000},
 		{name: "Scroll(1) of Comprehend Languages", price: 25},

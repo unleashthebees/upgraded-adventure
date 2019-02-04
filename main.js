@@ -472,9 +472,9 @@ function refreshExportTab() {
 	let loadNameElem = $("<input></input>");
 	loadNameElem.attr("id", "loadName");
 	parent.append(loadNameElem);
-	let loadElem = $("<div>Load</div>");
+	let loadElem = $("<button>Load</button>");
 	loadElem.click(function() {
-		let n = $("#loadName")[0].value;
+		let n = $("#loadName").val();
 		window.location.search = `?c=characters/${n}.js`;
 	});
 	parent.append(loadElem);
