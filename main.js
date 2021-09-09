@@ -262,8 +262,13 @@ function refreshDetailsTab() {
 
 	for (let i in stats.innate) {
 		let innate = stats.innate[i];
-		let elem = $(`<div>${innate.name}</div>`);
-		parent.append(elem);
+		if (innate.info) {
+			let elem = $(`<div>${innate.name}: ${innate.info}</div>`);
+			parent.append(elem);
+		} else {
+			let elem = $(`<div>${innate.name}</div>`);
+			parent.append(elem);
+		}
 	}
 }
 
