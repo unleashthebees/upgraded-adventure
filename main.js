@@ -138,6 +138,9 @@ function calcDerivedValues() {
 	calculateSkill("swim", "STR");
 	calculateSkill("use_magic_device", "CHA");
 
+	stats.spellSlotsPerDay = [];
+
+	// TODO: (10) replace the slot system with something like a kanban board (known|prepared|used)
 	stats.spellslots = [];
 
 	for (let isource in stats.spellcasting) {
@@ -161,6 +164,12 @@ function calcDerivedValues() {
 				}
 				stats.spellslots.push(slot);
 			}
+			stats.spellSlotsPerDay.push({
+				level: slvl,
+				accept: source.accept,
+				ability: source.ability,
+				limit: spellsAvailable
+			});
 		}
 	}
 	stats.spellslots.sort((a, b) => a.level > b.level);
@@ -279,6 +288,14 @@ function refreshDetailsTab() {
 function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
+
+	for (let i = 0; i < stats.spellSlotsPerDay.length; ++i) {
+		let slot = stats.spellSlotsPerDay[i];
+		let slotElem = $(`<div>${slot.level}: (${slot.accept}) ${slot.limit} per day, DC: ${SPELL_DC(slot.level, slot.ability)}</div>`);;
+		parent.append(slotElem);
+	}
+
+	return;
 
 	// TODO: (1) make prepareMode toggleable and save it in localStorage
 	let prepareMode = true;

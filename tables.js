@@ -99,3 +99,9 @@ function SPELLS_LEARNED_WITCH(clvl) {
 	}
 	return result;
 }
+
+function SPELL_DC(slvl, caster_stat) {
+	let a = stats["total" + caster_stat];
+	let bonus = STAT_MOD(a);
+	return 10 + slvl + bonus;
+}
