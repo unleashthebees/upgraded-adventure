@@ -90,7 +90,7 @@ characterSheet = {
 			bonus: {
 				data: ["AC+1"],
 				type: "natural"
-		},
+			},
 			price: 2000
 		},
 		{
@@ -98,18 +98,9 @@ characterSheet = {
 			power: {uses_per_day: 3},
 			price: 3000
 		},
-		{
-			name: "Spell Component Pouch",
-			price: 5
-		},
-		{
-			name: "Outfit, Traveler's"
-		},
-		{
-			name: "Silver Mirror",
-			price: 1100,
-			info: "plus box"
-		},
+		{name: "Spell Component Pouch", price: 5},
+		{name: "Outfit, Traveler's"},
+		{name: "Silver Mirror", price: 1100, info: "plus box"},
 		{name: "Handy Haversack", price: 2000},
 		{name: "Scroll(1) of Comprehend Languages", price: 25},
 		{name: "Scroll(1) of Mount", price: 25},
