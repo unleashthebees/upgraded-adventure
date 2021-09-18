@@ -289,9 +289,12 @@ function refreshSpellTab() {
 	let parent = $("#content_spells");
 	parent.html("");
 
+	let concCheckElem = $(`<div>Concentration Check: d20+${CONC_CHECK_BONUS()}</div>`);
+	parent.append(concCheckElem);
+
 	for (let i = 0; i < stats.spellSlotsPerDay.length; ++i) {
 		let slot = stats.spellSlotsPerDay[i];
-		let slotElem = $(`<div>${slot.level}: (${slot.accept}) ${slot.limit} per day, DC: ${SPELL_DC(slot.level, slot.ability)}</div>`);;
+		let slotElem = $(`<div>${slot.level}: (${slot.accept}) ${slot.limit} per day, DC: ${SPELL_DC(slot.level, slot.ability)}</div>`);
 		parent.append(slotElem);
 	}
 

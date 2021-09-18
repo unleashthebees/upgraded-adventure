@@ -105,3 +105,9 @@ function SPELL_DC(slvl, caster_stat) {
 	let bonus = STAT_MOD(a);
 	return 10 + slvl + bonus;
 }
+
+function CONC_CHECK_BONUS() {
+	let a = stats["total" + stats.spellcasting[0].ability];
+	let bonus = STAT_MOD(a);
+	return bonus + stats.clvl;
+}
