@@ -87,7 +87,7 @@ characterSheet = {
 			name: "Ring of Protection",
 			slot: "ring",
 			bonus: {
-				data: ["AC+1"],
+				data: ["AC+2"],
 				type: "deflection"
 			}
 		},
